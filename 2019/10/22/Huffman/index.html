@@ -16,16 +16,15 @@
 <meta property="og:site_name" content="福尔摩狮的博客">
 <meta property="og:description" content="导读１.　为什么哈弗曼编码能降低传输成本？ ２.　从哈弗曼树到哈弗曼编码 ３.　实现哈弗曼树用到的数据结构：最小优先队列（即最小堆） ４．代码实现（C++） １.　为什么哈弗曼编码能降低传输成本？　　哈弗曼编码是一种数据无损压缩的方式。根据通信原理，我们想进行数字传输的信息，如图像、声音文字等都是编码成“010101…”的二进制信号后再进行传输和解码。如果我们对这些需要编码的信息，比如英文里的26">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=%205*1%2B5*1%2B4*1%2B3*3%2B2*3%2B2*6%2B2*6%20%3D%2053">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-ed40ac9eece38fb43d715e4233a21943_b.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-9b379497b4b49be5325b94b555b35299_b.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-91dd22b6dd4183fbc4f9d731574e394d_b.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-b00e87907bf92caffa0034f5b438a43b_b.jpg">
-<meta property="og:updated_time" content="2019-10-22T23:34:07.255Z">
+<meta property="og:updated_time" content="2019-10-22T23:39:49.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈夫曼编码及其实现">
 <meta name="twitter:description" content="导读１.　为什么哈弗曼编码能降低传输成本？ ２.　从哈弗曼树到哈弗曼编码 ３.　实现哈弗曼树用到的数据结构：最小优先队列（即最小堆） ４．代码实现（C++） １.　为什么哈弗曼编码能降低传输成本？　　哈弗曼编码是一种数据无损压缩的方式。根据通信原理，我们想进行数字传输的信息，如图像、声音文字等都是编码成“010101…”的二进制信号后再进行传输和解码。如果我们对这些需要编码的信息，比如英文里的26">
-<meta name="twitter:image" content="https://www.zhihu.com/equation?tex=%205*1%2B5*1%2B4*1%2B3*3%2B2*3%2B2*6%2B2*6%20%3D%2053">
+<meta name="twitter:image" content="https://pic4.zhimg.com/v2-ed40ac9eece38fb43d715e4233a21943_b.jpg">
   
     <link rel="alternative" href="/atom.xml" title="福尔摩狮的博客" type="application/atom+xml">
   
@@ -203,7 +202,7 @@
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A: <span class="number">00000</span></span><br><span class="line">B: <span class="number">00001</span></span><br><span class="line">C: <span class="number">0001</span></span><br><span class="line">D: <span class="number">001</span></span><br><span class="line">E: <span class="number">01</span></span><br><span class="line">F: <span class="number">10</span></span><br><span class="line">G: <span class="number">11</span></span><br></pre></td></tr></table></figure>
 <p>　　那么，所需的编码长度降为：</p>
 <blockquote>
-<p><img src="https://www.zhihu.com/equation?tex=%205*1%2B5*1%2B4*1%2B3*3%2B2*3%2B2*6%2B2*6%20%3D%2053" alt=" 5*1+5*1+4*1+3*3+2*3+2*6+2*6 = 53"> 5<em>1+5</em>1+4<em>1+3</em>3+2<em>3+2</em>6+2*6 = 53 </p>
+<p> $5<em>1+5</em>1+4<em>1+3</em>3+2<em>3+2</em>6+2*6 = 53$ </p>
 </blockquote>
 <p>　　可见当高频字母的编码长度减小，而对应的低频字母的编码长度增大，最终的总长度减小，传输成本降低。而另一个关键点在于，由于上述编码为不等长编码，我们在解码的时候怎么样判断是哪个编码呢？仔细观察就可以发现，上述编码悄咪咪地满足一个条件：<strong>每个完整编码都不是任何另一个编码的首码，这就保证解码结果准确且唯一。</strong>其实这个编码就是用哈弗曼编码（Huffman code）实现的，下面详述一下实现过程。</p>
 <h2 id="２-从哈弗曼树到哈弗曼编码"><a href="#２-从哈弗曼树到哈弗曼编码" class="headerlink" title="２.　从哈弗曼树到哈弗曼编码"></a><strong>２.　从哈弗曼树到哈弗曼编码</strong></h2><p>　　实现哈弗曼编码用到的数据结构是哈弗曼树。哈弗曼树具有以下几个特点：</p>
