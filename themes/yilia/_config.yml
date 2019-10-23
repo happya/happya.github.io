@@ -2,8 +2,9 @@
 
 menu:
   主页: /
-  标签: /tags
   归档: /archives
+  算法: /tags/algorithm
+
   # 相册: /photos
 
 # SubNav
