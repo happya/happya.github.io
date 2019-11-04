@@ -156,6 +156,178 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Leetcode之旅-链表啊，链表！" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/17/Leetcode之旅-链表啊，链表！/">Leetcode之旅|链表啊，链表！(1)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/17/Leetcode之旅-链表啊，链表！/" class="archive-article-date">
+  	<time datetime="2018-01-18T06:12:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　自从前两天刷了那道链表的题之后觉得很有意思，奇妙的数据结构哇咔咔 ~ ~ ~ 但毕竟不是科班出身，对它的一些操作非常不熟悉，每次被各种head,tail,pre,next指来指去的东西绕得晕头转向。嗯，熟能生巧，所以我最近专注于刷链表相关的题目啊哈哈 ~ ~ ~</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>　　这篇博客回顾的题目是删除链表中重复元素的问题（链表均已排好序）：</p>
+<p>　　基础版：只删除重复了的元素，即保证唯一性 （<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">Leetcode Problem 83</a> ）。</p>
+<p>　　进阶版：删除有重复出现过的元素，即如果元素重复了，就将其从链表中剔除 （<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii" target="_blank" rel="noopener">Leetcode Problem 82</a> ）。</p>
+<p>　　发现我的语言很苍白，还是看实例吧：</p>
+<p>　　基础包：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Given 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5, return 1-&gt;2-&gt;5.</span><br><span class="line">Given 1-&gt;1-&gt;1-&gt;2-&gt;3, return 2-&gt;3.</span><br></pre></td></tr></table></figure>
+<p>　　升级包：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Given 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5, return 1-&gt;2-&gt;5.</span><br><span class="line">Given 1-&gt;1-&gt;1-&gt;2-&gt;3, return 2-&gt;3.</span><br></pre></td></tr></table></figure>
+<h2 id="解题思路及相关代码"><a href="#解题思路及相关代码" class="headerlink" title="解题思路及相关代码"></a>解题思路及相关代码</h2><h3 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h3><p>　　对于基础包而言，我们只需要一个指针，即下面代码中的cur，从head开始挨个遍历链表节点（所以链表已经排序好这个前提很重要），对于每个cur，将其与其后继的节点值比较，如果相同，说明这个后继需要删除，对链表而言，操作则相当简单，直接将cur的后继改为当前后继的后继即可。如果不同，说明没有与当前节点值重复的了，直接将当前节点后移即可，即将cur更新为当前节点的后继。<br>　　代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># 链表为空的特殊情况</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        <span class="comment"># 当前节点初始化为表头</span></span><br><span class="line">        cur = head</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 遍历，循环条件为当前节点和当前节点的后继不为空</span></span><br><span class="line">        <span class="keyword">while</span> cur <span class="keyword">and</span> cur.next:</span><br><span class="line">            <span class="comment"># 如果当前节点值和其后继值相等，则将其后继改为后继的后继</span></span><br><span class="line">            <span class="keyword">if</span> cur.val == cur.next.val:</span><br><span class="line">                cur.next = cur.next.next</span><br><span class="line">            <span class="comment"># 如果不相等，则将当前节点更新</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur = cur.next</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/01/17/Leetcode之旅-链表啊，链表！/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data Structure</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/17/Leetcode之旅-链表啊，链表！/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Gap-Gap-Gap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/16/Gap-Gap-Gap/">Gap Gap Gap</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/16/Gap-Gap-Gap/" class="archive-article-date">
+  	<time datetime="2018-01-17T06:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=32419802&auto=1&height=66"></iframe>
+
+<p>　　从博客搭建以来，每更新一篇都觉得压力重重：好像不能胡说，不能乱写，不能不严谨，不能不科学。直到昨天博客因为我的失误崩溃了，才意识到：这是我的个人blog，其实我可以写任何我想记录的事物，哪怕很感性，哪怕不够有格调。毕竟，本来就是为了好玩，为了“迹录”，何必给自己太多条条框框呢？</p>
+<p>　　庆幸的是，今天把博客抢修回来了。在修补的间隙，和上司长谈了一番，也是一时没忍住。虽然说出来并没有让我轻松多少，但也算是心平气和地收场。希望不后悔自己的决定，但愿在这之前我能为此努力。Gap Gap Gap year!</p>
+<p>　　总归是有舍才有得。其实这篇博客是为了测试添加音乐播放器的功能哈哈哈(所以这么言之无物),挑了首Por Una Cabeza (一步之遥)，不过因为版权保护，能生成外链播放的不多，这是我在不多的选择中挑出来比较好听的一个版本，听着能感受到tango的那种缠绵又对抗的挣扎感。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/16/Gap-Gap-Gap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Leetcode之旅：数据结构之P25" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -414,7 +586,7 @@
 <p>$\Sigma$：$D\times D$的协方差矩阵(covariance matrix)，$\Sigma_{ij}=(x_i-\mu_i)(x_j-\mu_j)$。</p>
 <p>我们可以从$N(x|\mu, \Sigma)$中的指数项出发，理解多元高斯分布的几何意义。</p>
 <p>首先，我们来看一下这个指数项  $\Delta^2 = (x-\mu)^T\Sigma^{-1}(x-\mu)$，发现其中主要包含两部分：一个是协方差矩阵$\Sigma$，一个是平移后的$x$。</p>
-<p>若$\Sigma$有D个特征值$\lambda<em>1,\lambda_2,…,\lambda_D$，其对应的特征向量为$u_1, u_2, …, u_D$，则$$\Sigma = \sum</em>{i=1}^{D}\lambda_iu_iu_i^T$$<br>其中，若所有$\lambda_i$都大于0，则说$\Sigma$是正定的(positive definite);若存在$\lambda_i = 0$,则说该分布是奇异的，说明其可以在低维子空间表达；若所有$\lambda$非负，则说明$\Sigma$是半正定的(positive semidefinite)。</p>
+<p>若$\Sigma$有D个特征值$\lambda_1,\lambda_2,…,\lambda_D$，其对应的特征向量为$u_1, u_2, …, u_D$，则<script type="math/tex">\Sigma = \sum_{i=1}^{D}\lambda_iu_iu_i^T</script><br>其中，若所有$\lambda_i$都大于0，则说$\Sigma$是正定的(positive definite);若存在$\lambda_i = 0$,则说该分布是奇异的，说明其可以在低维子空间表达；若所有$\lambda$非负，则说明$\Sigma$是半正定的(positive semidefinite)。</p>
 <p>$u_i$满足正交归一条件，即:</p>
 <script type="math/tex; mode=display">
 u_i^Tu_j=I_{ij}=
@@ -430,7 +602,7 @@ u_i^Tu_j=I_{ij}=
 \begin{equation}
 \Delta^2 = \sum_{i=1}^{D}\lambda_i^{-1}y_i^Ty_i=\sum_{i=1}^{D}\lambda_i^{-1}y_i^2
 \end{equation}</script><p>可见指数项由向量计算变成了普通的数值计算。可以看出，$y_i$就是$u_i$与$x-\mu$的向量内积，也可以看作向量$x$先进行平移将重心移到原点变成$(x-\mu)$，而后在基矢$u_i$上的投影值。因此，$y = (y_1,y_2,…,y_D)^T$ 可看作$x-\mu$在基矢$U$张成的线性空间的新坐标值。所以从$x$到$y$是做了个线性变换，$y = U^T(x-\mu), x= Uy+\mu$。</p>
-<p>从$x$到$y$的坐标系统，其Jacobi矩阵为$J<em>{ij} = \frac{\partial x_i}{\partial y_j}=U</em>{ij}$,$|J|^2 = |U|^2 = 1$, $|J| =1$。</p>
+<p>从$x$到$y$的坐标系统，其Jacobi矩阵为$J_{ij} = \frac{\partial x_i}{\partial y_j}=U_{ij}$,$|J|^2 = |U|^2 = 1$, $|J| =1$。</p>
 <p>在$y$的坐标系统中，其分布为:</p>
 <script type="math/tex; mode=display">
 \begin{equation}
@@ -522,7 +694,7 @@ p(y) = p(x)|J| = \prod_{i=1}^{D}(2\pi\lambda_i)^{-1/2}exp(-\frac{y_1^2}{2\lambda
 <ul>
 <li><p>所谓局部线性，就是认为在整个数据集的某小范围内，数据是线性的，就比如虽然地球是圆的，但我们还是可以认为我们的篮球场是个平面；而这个“小范围”，最直接的办法就是k-近邻原则。这个“近邻”的判断也可以是不同的依据：比如欧氏距离，测地距离等。</p>
 </li>
-<li><p>既然是线性，那么对每个数据点$x<em>i$(D维数据，即$D\times 1$的列向量)，可以用其k近邻的数据点的线性组合来表示，即$x_i = \sum</em>{j=1}^{k}w<em>{ji}x</em>{ji}$。其中，$w<em>i$是$k\times 1$的列向量，$w</em>{ji}$是$w<em>i$的第$j$行,$x</em>{ji}$是$x_i$的第j个近邻点。</p>
+<li><p>既然是线性，那么对每个数据点$x_i$(D维数据，即$D\times 1$的列向量)，可以用其k近邻的数据点的线性组合来表示，即$x_i = \sum_{j=1}^{k}w_{ji}x_{ji}$。其中，$w_i$是$k\times 1$的列向量，$w_{ji}$是$w_i$的第$j$行,$x_{ji}$是$x_i$的第j个近邻点。</p>
 </li>
 </ul>
 <ul>
@@ -835,15 +1007,15 @@ p(y) = p(x)|J| = \prod_{i=1}^{D}(2\pi\lambda_i)^{-1/2}exp(-\frac{y_1^2}{2\lambda
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -1004,15 +1176,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1076,6 +1248,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
               </li>
              
@@ -1084,7 +1264,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">backend</a>
               </li>
             
             <div class="clearfix"></div>

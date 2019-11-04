@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://pic2.zhimg.com/v2-9b379497b4b49be5325b94b555b35299_b.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-91dd22b6dd4183fbc4f9d731574e394d_b.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-b00e87907bf92caffa0034f5b438a43b_b.jpg">
-<meta property="og:updated_time" content="2019-10-22T23:54:36.251Z">
+<meta property="og:updated_time" content="2019-11-04T21:21:23.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈夫曼编码及其实现">
 <meta name="twitter:description" content="导读１.　为什么哈弗曼编码能降低传输成本？ ２.　从哈弗曼树到哈弗曼编码 ３.　实现哈弗曼树用到的数据结构：最小优先队列（即最小堆） ４．代码实现（C++） １.　为什么哈弗曼编码能降低传输成本？　　哈弗曼编码是一种数据无损压缩的方式。根据通信原理，我们想进行数字传输的信息，如图像、声音文字等都是编码成“010101…”的二进制信号后再进行传输和解码。如果我们对这些需要编码的信息，比如英文里的26">
@@ -196,7 +196,8 @@
 </blockquote>
 <p>一共有Ａ-G七个字符，其中A,B,C均出现一次，D,E均出现3次，F和G都出现了6次。如果无差别编码，我们可以用 $[log_27]+1=3$ 位二进制进行编码。既然无差别，我们不妨认为从A-G的编码依次为000,001,010,011,100,101,110。那么一共的编码的长度为:</p>
 <script type="math/tex; mode=display">
-3\times(1*3+3*2+6*2)=63</script><p>　　可是如果根据出现频率不同，我们将它们的编码改为：</p>
+3\times(1*3+3*2+6*2)=63</script><a id="more"></a>
+<p>　　可是如果根据出现频率不同，我们将它们的编码改为：</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A: <span class="number">00000</span></span><br><span class="line">B: <span class="number">00001</span></span><br><span class="line">C: <span class="number">0001</span></span><br><span class="line">D: <span class="number">001</span></span><br><span class="line">E: <span class="number">01</span></span><br><span class="line">F: <span class="number">10</span></span><br><span class="line">G: <span class="number">11</span></span><br></pre></td></tr></table></figure>
 <p>　　那么，所需的编码长度降为:  </p>
 <script type="math/tex; mode=display">
@@ -400,6 +401,15 @@ WPL = \sum_{i=1}^7 W_i\\ = 1*5 + 1*5+1*4+3*3+3*2+6*2+6*2=53</script><p>　　从
   
 <nav id="article-nav">
   
+    <a href="/2019/10/26/Graph/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          数据结构之——图（上）
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/05/08/circled-list/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Leetcode之旅|链表中的环</div>
@@ -541,15 +551,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -613,6 +623,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
               </li>
              
@@ -621,7 +639,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">backend</a>
               </li>
             
             <div class="clearfix"></div>

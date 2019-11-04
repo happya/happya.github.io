@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/10 | 福尔摩狮的博客</title>
+  <title>nodejs+Express+mongodb搭建个人博客体验（1） | 福尔摩狮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="福尔摩狮的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
+  <meta name="description" content="nodejs+Express+mongodb搭建个人博客体验​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～  1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章">
+<meta name="keywords" content="node.js,database,backend">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs+Express+mongodb搭建个人博客体验（1）">
+<meta property="og:url" content="http://yoursite.com/2019/11/04/nodejs1/index.html">
 <meta property="og:site_name" content="福尔摩狮的博客">
+<meta property="og:description" content="nodejs+Express+mongodb搭建个人博客体验​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～  1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-de502b50405eedfdb79c77e940b91368_b.png">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-5357e75d4d0b293af5f06d46732afe95_b.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-e591fe2d60945ed5fcf08990e62ebaf8_b.png">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-8a319b26eb20aae59d5035158b12159d_b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-b6c6232412582e8da3c6f15608d1a9d3_b.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-751daf946fa91eadd07656e8ab644b34_b.png">
+<meta property="og:updated_time" content="2019-11-04T21:20:53.420Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="福尔摩狮的博客">
+<meta name="twitter:title" content="nodejs+Express+mongodb搭建个人博客体验（1）">
+<meta name="twitter:description" content="nodejs+Express+mongodb搭建个人博客体验​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～  1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-de502b50405eedfdb79c77e940b91368_b.png">
   
     <link rel="alternative" href="/atom.xml" title="福尔摩狮的博客" type="application/atom+xml">
   
@@ -154,64 +166,300 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nodejs1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/21/PRML-之无处不在的高斯分布/" class="archive-article-date">
-  	<time datetime="2017-10-22T06:50:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/21/PRML-之无处不在的高斯分布/">PRML 之无处不在的高斯分布</a>
+    <h1 class="article-title" itemprop="name">
+      nodejs+Express+mongodb搭建个人博客体验（1）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/11/04/nodejs1/" class="archive-article-date">
+  	<time datetime="2019-11-04T21:17:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nodejs-Express-mongodb搭建个人博客体验"><a href="#nodejs-Express-mongodb搭建个人博客体验" class="headerlink" title="nodejs+Express+mongodb搭建个人博客体验"></a>nodejs+Express+mongodb搭建个人博客体验</h2><p>​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～</p>
+<hr>
+<h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1. 目标"></a>1. 目标</h2><p>这个项目主要是开发一个简单的多人博客系统，其基本功能如下： </p>
+<ul>
+<li>用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息</li>
+<li>文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章</li>
+</ul>
+<h2 id="2-工欲善其事，必先利其器——环境搭建"><a href="#2-工欲善其事，必先利其器——环境搭建" class="headerlink" title="2. 工欲善其事，必先利其器——环境搭建"></a>2. 工欲善其事，必先利其器——环境搭建</h2><h3 id="2-1-安装nodejs"><a href="#2-1-安装nodejs" class="headerlink" title="2.1 安装nodejs"></a>2.1 安装nodejs</h3><blockquote>
+<p> 我是windows系统，直接去官网下载，安装即可，安装完毕后打开cmd窗口，输入npm -v，如果可以查看版本信息，说明安装完成。  </p>
+</blockquote>
+<h3 id="2-2-安装MongoDB数据库"><a href="#2-2-安装MongoDB数据库" class="headerlink" title="2.2 安装MongoDB数据库"></a>2.2 安装MongoDB数据库</h3><blockquote>
+<p> 同样也是去官网安装，安装完毕后在系统变量中添加mongodb安装的bin文件夹，并通过如下命令  </p>
+</blockquote>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath C:<span class="symbol">\m</span>ongodb<span class="symbol">\d</span>ata --logpath C:<span class="symbol">\m</span>ongodb<span class="symbol">\l</span>og</span><br></pre></td></tr></table></figure>
+<p>设置数据库的数据路径和日志路径，可自己定义。然后在终端敲入mongo，即可看到数据库在27017端口启动。</p>
+<a id="more"></a>
+<p><img src="https://pic1.zhimg.com/v2-de502b50405eedfdb79c77e940b91368_b.png" alt="img"></p>
+<h3 id="2-3-安装各种依赖的模块"><a href="#2-3-安装各种依赖的模块" class="headerlink" title="2.3 安装各种依赖的模块"></a>2.3 安装各种依赖的模块</h3><blockquote>
+<p> 打开cmd或者git bash，用npm install命令安装。其中：  npm install -g packagename: 全局安装  npm install packgename —save:安装包的信息保存到package.json文件  </p>
+</blockquote>
+<p>因为这里要用到Express，所以要做如下安装:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> -g express</span><br><span class="line">npm <span class="keyword">install</span> -g express-generator</span><br></pre></td></tr></table></figure>
+<p>安装完毕后，直接生成项目框架</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">express -e nodeBlog</span></span><br></pre></td></tr></table></figure>
+<p>其中，nodeBlog是项目的名称，也是生成的文件夹的名称，其中包含了项目所需的各类文件。其他所需要的包也可以通过上述方法一一安装，比如上面说到的mongoDB数据库，这里也要安装对应的模块</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> mongoose <span class="comment">--save</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-4-加载所安装的模块"><a href="#2-4-加载所安装的模块" class="headerlink" title="2.4 加载所安装的模块"></a>2.4 加载所安装的模块</h3><blockquote>
+<p> nodeJs中通过require来加载所需的模块，有点类似Python里的import。比如引入上述的express模块，即可通过下面语句实现。  </p>
+</blockquote>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var express</span> = require(<span class="string">'express'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="3-文件结构"><a href="#3-文件结构" class="headerlink" title="3. 文件结构"></a>3. 文件结构</h2><p>按照上述方法生成的框架的文件结构如下图所示：</p>
+<p><img src="https://pic2.zhimg.com/v2-5357e75d4d0b293af5f06d46732afe95_b.png" alt="img"></p>
+<p>如图所示，项目由express框架快速搭建，整个blog项目的文件包含在nodeBlog文件夹中，其中</p>
+<ul>
+<li>bin:  存放可执行文件，express直接生成的是一个www.js文件。</li>
+<li>models:  这里存放的是自己模块文件，比如用到的数据模型。</li>
+<li>node_modules: 用到的模块，由<code>npm install &lt;module name&gt;</code>安装</li>
+<li>public：存放项目的静态资源，如css文件，图片等等</li>
+<li>routes: 存放路由文件，控制了整个项目各个页面的实现</li>
+<li>views: 存放视图文件，也就是每个页面的长相</li>
+<li>app.js: 项目的启动文件</li>
+<li>package.json: 存放项目的基本信息，如项目名，模块依赖信息等等。</li>
+</ul>
+<p>在app.js中设置监听端口为8080,app.listen(8080)，在文件夹内打开终端(这里我用的git bash)，输入node app.js，在浏览器内打开localhost:8080，即可看到如下界面:</p>
+<p><img src="https://pic1.zhimg.com/v2-e591fe2d60945ed5fcf08990e62ebaf8_b.png" alt="img"></p>
+<p>下面我们来看这个页面主要是由<code>routes/index.js</code>和<code>views/index.ejs</code>控制实现的。</p>
+<h2 id="4-页面设计"><a href="#4-页面设计" class="headerlink" title="4. 页面设计"></a>4. 页面设计</h2><h3 id="4-1-路由控制"><a href="#4-1-路由控制" class="headerlink" title="4.1 路由控制"></a>4.1 路由控制</h3><p>　　Express框架直接生成项目时，有一个routes文件夹，其中包含有index.js和users.js文件，其中index.js是这个项目的重中之重。routes文件夹负责对页面的路由进行控制。打开index.js文件，其中有如下形式的代码：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/'</span>,<span class="function"><span class="keyword">function</span><span class="params">(req,res)</span> </span>&#123;</span><br><span class="line">    res.render(<span class="string">'index'</span>,&#123;</span><br><span class="line">        title: <span class="string">'Homepage'</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这即是一个路由控制文件，之后我们写的负责各个页面的路由的文件均有类似的形式。其详细含义如下：</p>
+<ul>
+<li>get: http的请求方式，这个项目中只用到了get和post两种方法  </li>
+<li>参数 ‘/‘: 表示路由规则，这里指向主页，比如监听端口为8080,即指向localhost:8080。如果我们将参数设为’/login’ ，则表示指向localhost:8080/login页面。  </li>
+<li>第二个参数function(req,res)为callback函数，其中的req和res代表请求信息(request)和相应信息(respond)。稍后会介绍这两个参数包含的具体信息和用法。  </li>
+<li>res.render()中传递的是一个json格式的数据，这个数据会传递给第一个参数指向的ejs文件，这里指向的是index.ejs。也就是说这个函数向index.ejs传递了一个名为title的参数，其值为Homepage。而对应地在index.ejs文件里我们通过&lt;%= title %&gt;可以引用这个参数。</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span>   </span><br><span class="line">        <span class="tag">&lt;<span class="name">head</span>&gt;</span>      </span><br><span class="line">                   <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">title</span> %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span>      </span><br><span class="line">                   <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">'stylesheet'</span> <span class="attr">href</span>=<span class="string">'/stylesheets/style.css'</span> /&gt;</span>     </span><br><span class="line">       <span class="tag">&lt;/<span class="name">head</span>&gt;</span>    </span><br><span class="line">      <span class="tag">&lt;<span class="name">body</span>&gt;</span>       </span><br><span class="line">                  <span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">title</span> %&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span>       </span><br><span class="line">                 <span class="tag">&lt;<span class="name">p</span>&gt;</span>Welcome to <span class="tag">&lt;<span class="name">%=</span> <span class="attr">title</span> %&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span>  </span><br><span class="line">     <span class="tag">&lt;/<span class="name">body</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 这样页面就会显示为下图。  </p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/v2-8a319b26eb20aae59d5035158b12159d_b.png" alt="img"></p>
+<h3 id="4-2-ejs文件"><a href="#4-2-ejs文件" class="headerlink" title="4.2 ejs文件"></a>4.2 ejs文件</h3><p>从上图可以看出ejs文件和html很类似，除了用&lt;% %&gt;包裹的部分，这个项目中我们用到的ejs的语法规则也很简单，只有如下三种：</p>
+<ul>
+<li><code>&lt;% %&gt;</code>: 包含的是js代码，如<code>if-else</code></li>
+<li><code>&lt;%= %&gt;</code> : 用于显示替换过的html特殊字符的内容，如上面的&lt;%= title %&gt;即显示的是由js文件中res.render()函数传递过来的title的值</li>
+<li><code>&lt;%- %&gt;</code>：用来包含一段html的原始内容，比如所有页面通常会有一个共用的信息，比如一些包含的css文件，比如页面顶端的一些显示，为了避免在每个ejs文件里重复写，我们可以单独写一个header.ejs文件，然后在其他ejs文件里通过&lt;%- include header %&gt;来直接调用这个文件，其效果相当于将整个header.ejs文件复制过去。</li>
+</ul>
+<p>ejs文件存放在views文件夹中，顾名思义，它们负责的是每个页面的样式的。我们在使用express建立项目时，命令里的-e事实上就是制定了使用ejs作为模板引擎。</p>
+<h3 id="4-3-req和res参数介绍"><a href="#4-3-req和res参数介绍" class="headerlink" title="4.3 req和res参数介绍"></a>4.3 req和res参数介绍</h3><p>　　在这个项目中，我们只用到了get和post两种请求方式，我的理解是get，就是向我直接请求一个页面，比如说”请给我显示主页吧”，router.get()函数就会把主页的信息返回在浏览器显示出来。Post就是提交一些信息，比如注册时填写的表单，发表博客的内容等，会由route.post()函数处理。</p>
+<p>　　需要注意的是，get方法同样可以进行表单的提交，这个在html的表单属性中会指明用哪种方法发送请求&lt;form method=’ ‘，可能是get也可能是post，区别在与get方法能发送的数据量有限，一般只有几百个字节，所以在这个项目中，注册信息，博客内容通过post方法提交，而查询时的字段通过get方法提交。 </p>
+<p>　　在这些过程中，参数的获取方式如下：</p>
+<ul>
+<li>req.query: 处理get请求，获取get请求参数。</li>
+<li>req.body: 处理post请求</li>
+<li>req.params: 处理形如/:xxx形式的get或者post请求</li>
+</ul>
+<p>下面举几个具体的例子生动形象地说明下怎么传递这些参数。</p>
+<h3 id="4-3-1-req-body"><a href="#4-3-1-req-body" class="headerlink" title="4.3.1. req.body"></a>4.3.1. req.body</h3><p>以登录页面(/login)为例。因为登录需要提交登录信息，这里要用到post方法，我们首先在login.ejs文件中写入如下代码：</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%-</span></span></span><span class="ruby"> <span class="keyword">include</span> header </span><span class="xml"><span class="tag">%&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 用户名输入框 --&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">placeholder</span>=<span class="string">"用户名"</span></span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 密码输入框 --&gt;</span>    </span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">placeholder</span>=<span class="string">"密码"</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="comment">&lt;!-- 提交按钮 --&gt;</span>      </span></span><br><span class="line"><span class="xml">   <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-success center-block"</span>&gt;</span>Login<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">%-</span></span></span><span class="ruby"> <span class="keyword">include</span> footer </span><span class="xml"><span class="tag">%&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>　　　可以看出，这里建立了用户名和密码输入框，以及一个提交按钮，其中用到的class:form-group, form-control, btn btn-success等都是用到了bootstrap里的样式。那么在对应的路由控制文件里怎么接受这些参数呢？这里请求了用户名和密码两个参数，名称分别为username和password(由name属性命名)，那么在router.post(‘/login’,callback)函数里就可这样获得请求体：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var username</span> = req.body.username;</span><br><span class="line"><span class="attribute">var password</span> = req.body.password;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-2-req-query"><a href="#4-3-2-req-query" class="headerlink" title="4.3.2. req.query"></a>4.3.2. req.query</h3><p>再比如，我们在页面顶端定义了一个搜索框：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;form <span class="class"><span class="keyword">class</span></span>=<span class="string">"navbar-form navbar-right"</span> role=<span class="string">"search"</span> action=<span class="string">"/search"</span> method=<span class="string">"get"</span>&gt;</span><br><span class="line">    &lt;!-- 搜索框 --&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-group"</span>&gt;</span><br><span class="line">        &lt;input type=<span class="string">"text"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> name=<span class="string">"search"</span> placeholder=<span class="string">"Search"</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;!-- 搜索提交按钮 --&gt;</span></span><br><span class="line"><span class="regexp">    &lt;button type="submit" class="btn btn-default"&gt;search&lt;/</span>button&gt;                   </span><br><span class="line">&lt;<span class="regexp">/form&gt;</span></span><br></pre></td></tr></table></figure>
+<p>　　这里表单提交的请求方法为get，输入的搜索信息的name为search，那么我们在对应的路由控制函数，如router.get(‘/search’,callback)中，就可以这样获得请求体：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">query</span>=req.<span class="keyword">query</span>.<span class="keyword">search</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-3-req-params"><a href="#4-3-3-req-params" class="headerlink" title="4.3.3. req.params"></a>4.3.3. req.params</h3><p>　　比如我们想通过博客文章的id来查看文章详情，并通过/detail/:_id来访问，这里的_id是建立文章的时候生成的，比如我新建一篇文章，数据库里会新添一条记录</p>
+<p><img src="https://pic4.zhimg.com/v2-b6c6232412582e8da3c6f15608d1a9d3_b.png" alt="img"></p>
+<p>而我们想通过这个_id访问文章，即可通过req.params._id获得对应的请求参数。</p>
+<h3 id="4-2-页面逻辑"><a href="#4-2-页面逻辑" class="headerlink" title="4.2 页面逻辑"></a>4.2 页面逻辑</h3><p>根据第一部分的目标分析，我们目前需要设计如下的一些页面：</p>
+<p><img src="https://pic1.zhimg.com/v2-751daf946fa91eadd07656e8ab644b34_b.png" alt="img"></p>
+<ul>
+<li>/:    主页，由views/index.ejs负责</li>
+<li>/login: 登录页面，由views/login.ejs负责，需要构建一个form表单，填写用户名，密码信息</li>
+<li>/reg： 注册页面，由views/register.ejs负责，需要构建一个form，填写用户名、密码、重复密码、邮箱信息</li>
+<li>/post:  文章发表页面，由views/post.ejs负责，需要一个form，填写标题，作者，标签，创建时间，博客正文信息。</li>
+<li>/edit: 文章编辑页面，由views/edit.ejs负责，其表单和post页面一致，需要自动填写文章原有信息，方便修改。</li>
+<li>/search搜索结果页面，由views/search.ejs负责，布局和主页一致</li>
+<li>header.ejs和footer.ejs为其他页面共享。</li>
+</ul>
+<p>上述结果的路由规则均在routes/index.js文件中通过router.get()和router.post()函数指定。</p>
+<h3 id="4-4-连接数据库"><a href="#4-4-连接数据库" class="headerlink" title="4.4 连接数据库"></a>4.4 连接数据库</h3><p>　　之前我们已经安装了Mongodb和专为NodeJs设计的模型工具mongoose，这里我们先在app.js中引入mongoose模块：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var mongoose</span>=require(<span class="string">'mongoose'</span>);</span><br></pre></td></tr></table></figure>
+<p>指定连接的数据库</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var <span class="attribute">DB_URL</span>=<span class="string">'mongodb//localhost:27017/blogs'</span>;</span><br></pre></td></tr></table></figure>
+<p>　　其中blogs是我们使用的数据库的名字，在打开的终端中输入mongo后，通过use blogs命令可以切换到该数据库，然后通过show collections可以看数据库中的所有集合，目前因为我们还没创建数据，所以是空的。</p>
+<p>然后，继续在app.js中连接数据库</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mongoose.connect(DB_URL,&#123;<span class="attr">useMongoClient</span>:<span class="literal">true</span>&#125;);</span><br><span class="line"><span class="comment">//连接成功</span></span><br><span class="line">mongoose.connection.on(<span class="string">'connected'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connect success '</span>+DB_URL);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//连接失败</span></span><br><span class="line">mongoose.connection.on(<span class="string">'error'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connect error '</span>+err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-设置数据模型"><a href="#4-5-设置数据模型" class="headerlink" title="4.5 设置数据模型"></a>4.5 设置数据模型</h3><p>　　我们的博客系统主要有两类数据：用户和文章，需要建立这两类数据模型。在这里，我们使用mongoose的schema模型对象来创建数据模型，模型文件存放在models/model.js中。首先我们引入mongoose模块并定义schema模型对象：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">var mongoose</span>=require(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="attribute">var Schema</span>=mongoose.Schema;</span><br></pre></td></tr></table></figure>
+<p>用户类数据具有用户名，密码，邮箱，创建时间几个属性：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> userSchema=<span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    username: <span class="built_in">String</span>,</span><br><span class="line">    password: <span class="built_in">String</span>,</span><br><span class="line">    email: <span class="built_in">String</span>,</span><br><span class="line">    createTime: &#123;</span><br><span class="line">        <span class="keyword">type</span>: <span class="built_in">Date</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="built_in">Date</span>.now()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>文章类数据有标题，标签，内容，作者，创建时间，浏览次数几个属性：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> articleSchema= <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    title: <span class="built_in">String</span>,</span><br><span class="line">    author: <span class="built_in">String</span>,</span><br><span class="line">    tag: <span class="built_in">String</span>,</span><br><span class="line">    content: <span class="built_in">String</span>,</span><br><span class="line">    createTime: &#123;</span><br><span class="line">        <span class="keyword">type</span>: <span class="built_in">Date</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="built_in">Date</span>.now()</span><br><span class="line">    &#125;,</span><br><span class="line">    pv: &#123;</span><br><span class="line">        <span class="keyword">type</span>: <span class="built_in">Number</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>导出模块供其他文件调用</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">exports.User</span>=mongoose.model(<span class="string">'User'</span>,userSchema)<span class="comment">;</span></span><br><span class="line"><span class="attr">exports.Article</span>=mongoose.model(<span class="string">'Article'</span>,articleSchema)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>在routes/index.js中调用创建好的数据模型：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var <span class="attribute">model</span>=require('../models/model')</span><br><span class="line">var <span class="attribute">User</span>=model.User;</span><br><span class="line">var <span class="attribute">Article</span>=model.Article;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thanks!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">读书笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">database</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">backend</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/04/nodejs1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/10/26/Graph/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构之——图（上）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -234,8 +482,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

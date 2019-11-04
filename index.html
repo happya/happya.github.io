@@ -156,6 +156,201 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nodejs1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/04/nodejs1/">nodejs+Express+mongodb搭建个人博客体验（1）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/04/nodejs1/" class="archive-article-date">
+  	<time datetime="2019-11-04T21:17:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nodejs-Express-mongodb搭建个人博客体验"><a href="#nodejs-Express-mongodb搭建个人博客体验" class="headerlink" title="nodejs+Express+mongodb搭建个人博客体验"></a>nodejs+Express+mongodb搭建个人博客体验</h2><p>​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～</p>
+<hr>
+<h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1. 目标"></a>1. 目标</h2><p>这个项目主要是开发一个简单的多人博客系统，其基本功能如下： </p>
+<ul>
+<li>用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息</li>
+<li>文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章</li>
+</ul>
+<h2 id="2-工欲善其事，必先利其器——环境搭建"><a href="#2-工欲善其事，必先利其器——环境搭建" class="headerlink" title="2. 工欲善其事，必先利其器——环境搭建"></a>2. 工欲善其事，必先利其器——环境搭建</h2><h3 id="2-1-安装nodejs"><a href="#2-1-安装nodejs" class="headerlink" title="2.1 安装nodejs"></a>2.1 安装nodejs</h3><blockquote>
+<p> 我是windows系统，直接去官网下载，安装即可，安装完毕后打开cmd窗口，输入npm -v，如果可以查看版本信息，说明安装完成。  </p>
+</blockquote>
+<h3 id="2-2-安装MongoDB数据库"><a href="#2-2-安装MongoDB数据库" class="headerlink" title="2.2 安装MongoDB数据库"></a>2.2 安装MongoDB数据库</h3><blockquote>
+<p> 同样也是去官网安装，安装完毕后在系统变量中添加mongodb安装的bin文件夹，并通过如下命令  </p>
+</blockquote>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath C:<span class="symbol">\m</span>ongodb<span class="symbol">\d</span>ata --logpath C:<span class="symbol">\m</span>ongodb<span class="symbol">\l</span>og</span><br></pre></td></tr></table></figure>
+<p>设置数据库的数据路径和日志路径，可自己定义。然后在终端敲入mongo，即可看到数据库在27017端口启动。</p>
+        
+          <a class="article-more-a" href="/2019/11/04/nodejs1/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">database</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">backend</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/04/nodejs1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Graph" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/26/Graph/">数据结构之——图（上）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/26/Graph/" class="archive-article-date">
+  	<time datetime="2019-10-27T00:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ol>
+<li>什么是图？图的存储方式？</li>
+<li>图的遍历（深度优先搜索，广度优先搜索）</li>
+<li>最短路径  </li>
+</ol>
+<h2 id="1-什么是图？图的存储方式"><a href="#1-什么是图？图的存储方式" class="headerlink" title="1. 什么是图？图的存储方式"></a>1. 什么是图？图的存储方式</h2><p>　　前面总结了“树”这种数据结构，而这篇博客总结的是更为复杂的一种数据结构：图（graph），它表明了物件与物件之间的<strong>“多对多”</strong>的一种复杂关系。图包含了两个基本元素：顶点（vertex, 简称$V$）和边（edge,简称$E$）。</p>
+<p><strong>有向图与无向图</strong></p>
+<p>　　如果给图的每条边规定一个方向，那么得到的图称为<strong>有向图</strong>。在有向图中，从一个顶点出发的边数称为该点的<strong>出度</strong>，而指向一个顶点的边数称为该点的<strong>入度</strong>。相反，边没有方向的图称为<strong>无向图</strong>。</p>
+<p><strong>有权图与无权图</strong></p>
+<p> 　　如果图中的边有各自的权重，得到的图是<strong>有权图</strong>。比如地铁路线图，连接两站的边的权重可以是距离，也可以是价格，或者其他。反之，如果图的边没有权重，或者权重都一样（即没有区分），称为<strong>无权图</strong>。</p>
+<p><strong>连通图</strong></p>
+<p>　　如果图中任意两点都是连通的，那么图被称作<strong>连通图</strong>。图的连通性是图的基本性质。无向图中的一个极大连通子图称为其的一个连通分量。有向图中，如果对任意两个顶点 $V_i$ 与 $V_j$ 都存在 $i$ 到 $j$ 以及 $j$ 到 $i$ 的路径，则称其为<strong>强连通图</strong>，对应有<strong>强连通分量</strong>的概念。</p>
+<p><strong>图的存储</strong></p>
+<p>　　常用的存储方式有两种<strong>：邻接矩阵和邻接表。</strong></p>
+        
+          <a class="article-more-a" href="/2019/10/26/Graph/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data Structure</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Graph</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/26/Graph/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Huffman" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -188,89 +383,10 @@
 </blockquote>
 <p>一共有Ａ-G七个字符，其中A,B,C均出现一次，D,E均出现3次，F和G都出现了6次。如果无差别编码，我们可以用 $[log_27]+1=3$ 位二进制进行编码。既然无差别，我们不妨认为从A-G的编码依次为000,001,010,011,100,101,110。那么一共的编码的长度为:</p>
 <script type="math/tex; mode=display">
-3\times(1*3+3*2+6*2)=63</script><p>　　可是如果根据出现频率不同，我们将它们的编码改为：</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A: <span class="number">00000</span></span><br><span class="line">B: <span class="number">00001</span></span><br><span class="line">C: <span class="number">0001</span></span><br><span class="line">D: <span class="number">001</span></span><br><span class="line">E: <span class="number">01</span></span><br><span class="line">F: <span class="number">10</span></span><br><span class="line">G: <span class="number">11</span></span><br></pre></td></tr></table></figure>
-<p>　　那么，所需的编码长度降为:  </p>
-<script type="math/tex; mode=display">
-5*1+5*1+4*1+3*3+2*3+2*6+2*6 = 53</script><p>　　可见当高频字母的编码长度减小，而对应的低频字母的编码长度增大，最终的总长度减小，传输成本降低。而另一个关键点在于，由于上述编码为不等长编码，我们在解码的时候怎么样判断是哪个编码呢？仔细观察就可以发现，上述编码悄咪咪地满足一个条件：<strong>每个完整编码都不是任何另一个编码的首码，这就保证解码结果准确且唯一。</strong>其实这个编码就是用哈弗曼编码（Huffman code）实现的，下面详述一下实现过程。</p>
-<h2 id="２-从哈弗曼树到哈弗曼编码"><a href="#２-从哈弗曼树到哈弗曼编码" class="headerlink" title="２.　从哈弗曼树到哈弗曼编码"></a><strong>２.　从哈弗曼树到哈弗曼编码</strong></h2><p>　　实现哈弗曼编码用到的数据结构是哈弗曼树。哈弗曼树具有以下几个特点：</p>
-<blockquote>
-<ol>
-<li>二叉树 </li>
-<li>带权路径长度最小二叉树</li>
-</ol>
-</blockquote>
-<p>　　</p>
-<h3 id="带权路径最小是什么意思呢？"><a href="#带权路径最小是什么意思呢？" class="headerlink" title="带权路径最小是什么意思呢？"></a>带权路径最小是什么意思呢？</h3><blockquote>
-<p>N个给定权值作为叶子结点，其每个叶子结点带权路径长度为其权值乘以其到根节点的路径长度（也可以看作是该叶子结点的高度），记为 $W_i$ ；所有N个带叶子结点的带权路径长度即为该二叉树的总带权路径长度，记为WPL。</p>
-</blockquote>
-<script type="math/tex; mode=display">
-WPL = \sum_{i=1}^N W_i</script><p>　　比如下面这棵树，</p>
-<p><img src="https://pic4.zhimg.com/v2-ed40ac9eece38fb43d715e4233a21943_b.jpg" alt="img"></p>
-<p>图1. 带权值的二叉树。</p>
-<script type="math/tex; mode=display">
-WPL = W_1+W_2+W_3 = 1*2+1*2+1*1=5</script><p>那么如何构建哈弗曼树呢（实现哈弗曼树的方法不唯一，这里只介绍其中一种）。</p>
-<p>　　我们将上一part的例子继续拿过来，其中讲到的字符串中各个字母出现的频率如下：</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A: <span class="number">1</span></span><br><span class="line">B: <span class="number">1</span></span><br><span class="line">C: <span class="number">1</span></span><br><span class="line">D: <span class="number">3</span></span><br><span class="line">E: <span class="number">3</span></span><br><span class="line">F: <span class="number">6</span></span><br><span class="line">G: <span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p>　　将其中七个频率值作为七个带权重的叶子节点，如下图所示：</p>
-<p><img src="https://pic2.zhimg.com/v2-9b379497b4b49be5325b94b555b35299_b.jpg" alt="img"></p>
-<p>图2. 七个带权重的叶子结点。</p>
-<p>　　然后通过下面步骤构建哈弗曼树 （如图3所示，其中叶子结点用黄色标记）：</p>
-<blockquote>
-<ol>
-<li>将这七个节点看作七棵二叉树，那么它们都是只有根节点的二叉树，这七棵树组成一片森林。 </li>
-<li>每次从森林中挑选根节点最小的两棵树，新建一个根节点，其值为选中的两棵树的根节点值之和，并将这两棵树分别作为新建根节点的左子树和右子树。 </li>
-<li>重复步骤2，直到森林中只剩一棵二叉树。</li>
-</ol>
-</blockquote>
-<p><img src="https://pic2.zhimg.com/v2-91dd22b6dd4183fbc4f9d731574e394d_b.jpg" alt="img"></p>
-<p><img src="https://pic4.zhimg.com/v2-b00e87907bf92caffa0034f5b438a43b_b.jpg" alt="img"></p>
-<p>图3. 哈弗曼树构建过程。</p>
-<p>　　我们可以来计算一下构建好的哈弗曼树的WPL值:</p>
-<script type="math/tex; mode=display">
-WPL = \sum_{i=1}^7 W_i\\ = 1*5 + 1*5+1*4+3*3+3*2+6*2+6*2=53</script><p>　　从上图也可以看出，哈夫曼树的构建方法是自底向上的。且由于每次挑选的是权值最小的根节点，保证了权值越大的节点高度越小，而权值越小的节点高度越大，从而使得总体花费最小。　　</p>
-<p>　　那么，如何从哈弗曼树到哈弗曼编码呢？二叉树，二进制，0和1，好像冥冥中有种联系？</p>
-<p>没错的，每个叶子结点是我们需要编码的字母的频率值，我们可以根据从根节点到各个叶子结点的路径确定其编码值，即：</p>
-<blockquote>
-<p><strong>从根节点出发，每次往左边走，我们记为0；每次往右边走，我们记为1。</strong></p>
-</blockquote>
-<p>比如最左的叶子结点，走了五步，每次都是往左，因此其编码为00000。其实之前稍微剧透了一下，上一节中说到的根据出现频率的编码就是用这课实现的哈弗曼树实现的。</p>
-<h2 id="３-实现哈弗曼树的数据结构：最小优先队列（即最小堆）"><a href="#３-实现哈弗曼树的数据结构：最小优先队列（即最小堆）" class="headerlink" title="３.　实现哈弗曼树的数据结构：最小优先队列（即最小堆）"></a><strong>３.　实现哈弗曼树的数据结构：最小优先队列（即最小堆）</strong></h2><p>　　从上一节可知，在构建哈弗曼树的过程中，我们每次每次都会选出值最小的两个根节点，所以很自然地想到能够在 $O(1)$ 直接取出最小值，并用 $O(lgN)$ 维护其结构的：</p>
-<blockquote>
-<p><strong>最小堆 （minimum heap）</strong></p>
-</blockquote>
-<p>它还有个更为炫酷的名字：最小优先队列。</p>
-<p>　　第一次接触“堆”这种数据结构是在学习“堆排序”的时候，如果说快速排序给我的是一种智力上的简洁与惊艳感，堆排序则是从开始的“有必要这么复杂吗”到“太惊艳了”。快速排序就像天山折梅手，精简而强大；堆排序就像小无相功，不着形迹却威力无穷。</p>
-<p>　　扯远了，这篇文章只介绍一下这种数据结构为什么适用于实现哈弗曼编码。<strong>最小堆，是完全二叉树，且每个节点的值，均小于其左右孩子（如果有）的节点值。</strong></p>
-<p>　　因为是完全二叉树，因此堆可以直接用线性表存储（详见<a href="https://zhuanlan.zhihu.com/p/35035166" target="_blank" rel="noopener">上一篇博客</a>）。<strong>另一方面，其根节点的值即是所有节点的最小值</strong>，即找最小值的时间为 $O(1)$ 。而取出最小值后，需要维护堆的结构使其满足最小堆的性质，具体如下：</p>
-<blockquote>
-<p>  １. 将根节点与最后一个叶子节点对调，取出最后的节点，即得到最小值； </p>
-<ol>
-<li>将此时新的根节点和其左右孩子比较：<ol>
-<li>如果比他们都小，那么依旧满足最小堆性质；</li>
-<li>如果不是最小，和最小的对调，并在对应的子树中逐层检查并维护最小堆的性质。</li>
-</ol>
-</li>
-</ol>
-</blockquote>
-<p>　　可以看出，维护最小堆需要的的时间为 $O(h) $（<em>h</em>为二叉树的高度），而根据完全二叉树的性质可知， $h=\left[ log_2N \right]+1$ （N为节点个数）。</p>
-<p>　　在C++中有现成的实现最小优先队列，也即最小堆的容器：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,greater&lt;<span class="keyword">int</span>&gt;&gt; q;</span><br></pre></td></tr></table></figure>
-<p>　　回到哈弗曼树，每次我们取出两个最小的根节点，并求出他们的和：</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">sum</span> = q.<span class="built_in">top</span>()</span><br><span class="line">q.pop();</span><br><span class="line"><span class="built_in">sum</span>+=q.<span class="built_in">top</span>()</span><br><span class="line">q.pop()</span><br></pre></td></tr></table></figure>
-<p>　　然后将新的根节点的值，也即求得的和值插入最小优先队列：</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.<span class="built_in">push</span>(<span class="built_in">sum</span>)</span><br></pre></td></tr></table></figure>
-<p>　　如此直到队列为空，即可自底向上地得到哈弗曼树的节点值。</p>
-<h2 id="４．代码实现（C-）"><a href="#４．代码实现（C-）" class="headerlink" title="４．代码实现（C++）"></a><strong>４．代码实现（C++）</strong></h2><p>这一段并不打算直接贴代码。。。</p>
-<p>　　其实这篇学习笔记是听一门数据结构课的OJ作业，题目也不是实现哈弗曼编码，而是根据已有的字母和频率值，判断几个实现的编码是否哈弗曼编码，因为实现哈弗曼编码的方法不唯一，因此并不实现哈弗曼编码，而是根据下面两个条件判断是否符合：</p>
-<blockquote>
-<ol>
-<li>根据哈弗曼树的构建过程，通过上述最小优先队列的实现方法，得出最小的WPL值，也即最小的cost；然后计算每种编码方法的cost，如果大于预期最小的cost，那么就不是哈弗曼编码。 </li>
-<li>如果不大于最小的cost，那么要请出另一个条件，也即之前反复强调的：<strong>为了能准确且唯一地解码，判断是否某段编码是其它编码的首码</strong>。如果是，那么就不是哈弗曼编码。</li>
-</ol>
-</blockquote>
-<p>　　我会把解题代码放到GitHub (<a href="https://github.com/happya/fun-algorithms-cpp/tree/master/Huffman" target="_blank" rel="noopener">解题代码~</a>)~~~</p>
-
+3\times(1*3+3*2+6*2)=63</script>
+        
+          <a class="article-more-a" href="/2019/10/22/Huffman/#more">more >></a>
+        
       
 
       
@@ -403,11 +519,11 @@ L+(m+L+x-L)\%C\\
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -792,11 +908,11 @@ L+(m+L+x-L)\%C\\
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -911,11 +1027,11 @@ L+(m+L+x-L)\%C\\
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -990,7 +1106,7 @@ L+(m+L+x-L)\%C\\
         <p>　　已经一周没更新博客了，这周真是命途多舛的一周。先是工作上的问题，后是人际关系的问题，以为已经够悲催了，觉得至少应该保持身体健康，心情愉悦，然后督促自己去健身，保持强健的体魄。坚持了三天后，被一个爱diss人的普拉提教练给push，然后很悲剧地把腰给伤了。当我回家，躺在床上，发现自己坐也坐不起来，站也站不起来的时候，眼泪止不住地流：我这是何苦呢？我又不胖[泪崩][泪崩][泪崩]。然后打开手机，发现自己都不知该找谁寻求安慰，毕竟我的朋友都胖也不健身，一个胖子看到身边的瘦子还这么上进估计也不想搭理我。</p>
 <p>　　从周三晚上到现在，躺着床上难受，也许是因为太孤独，哭了好多，也胡思乱想了好多，既顾影自怜，也认真地咽下了许多失望。写这篇博客，可能只是想像以前一样：即使知道徒劳无功，但只有让自己忙起来才不会那么难过。</p>
 <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><a href="https://leetcode.com/problems/reorder-list/description/" target="_blank" rel="noopener">题目描述</a></h2><blockquote>
-<p>　　今天写的这道题和之前<a href="http://www.quanlion.com/2018/01/15/Leetcode%E4%B9%8B%E6%97%85%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BP25/" target="_blank" rel="noopener">反转k个节点</a>的这道有点类似,即：对一个已知链表：$L<em>0→L_1→…→L</em>{n-1}→L<em>n$,改变其链接顺序为：$L_0→L_n→L_1→L</em>{n-1}→L<em>2→L</em>{n-2}→…$。即第一个后为最后一个，接着是第二个，接着是倒数第二个…比如原链表为{1,2,3,4},修改后变为{1,4,2,3}。要求是原位修改，即不能改变原节点的值，只改变它们之间的先后顺序，也不需要返回任何值。
+<p>　　今天写的这道题和之前<a href="http://www.quanlion.com/2018/01/15/Leetcode%E4%B9%8B%E6%97%85%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BP25/" target="_blank" rel="noopener">反转k个节点</a>的这道有点类似,即：对一个已知链表：$L_0→L_1→…→L_{n-1}→L_n$,改变其链接顺序为：$L_0→L_n→L_1→L_{n-1}→L_2→L_{n-2}→…$。即第一个后为最后一个，接着是第二个，接着是倒数第二个…比如原链表为{1,2,3,4},修改后变为{1,4,2,3}。要求是原位修改，即不能改变原节点的值，只改变它们之间的先后顺序，也不需要返回任何值。
 　　</p>
 </blockquote>
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>　　说实话，这道题我拿到手的时候基本没思路，因为链表这种数据结构的特殊性导致我们既无法通过下标直接访问某个节点，也无法知道某个节点的前驱节点。后来看一些帖子说这个问题是<a href="https://leetcode.com/problems/reverse-linked-list/description/" target="_blank" rel="noopener">反转节点</a>这道题的延伸，就有了想法。<br>　　我们不妨把链表看作一根均匀分布珠子的项链，然后让它对折，这样第一颗珠子会和最后一颗珠子对应，第二颗会和倒数第二颗对应，以此类推。这样一来，我们同步地遍历这两段绳子，不就可以按照要求缀出新的项链了吗？<br>　　所以问题就可以这么解决：我们将链表从中间分开，将后面那半反转，然后将两部分逐个拼接。这会用到我们常用的两个套路：找到中间位置和链表的反转。第一个套路就是熟悉的slow-fast指针法，即设置slow和fast两个指针，slow每次走一步，fast每次走两步，这样当fast到达终点时，slow会走一半到中间。根据需求可以对slow和fast进行初始化，比如slow=fast=head，或者slow=head,fast=head.next。第二个套路也很熟悉，即对每个节点保存其Pre和next，将其对调即可，而且因为是逐个反转，pre,cur,next会逐个后移，前驱与后继信息得以在循环中传递。<br>　　虽然这样，我们可能还会有一个问题：如果珠子是奇数个怎么办？这个好解决，因为奇数个珠子的项链肯定存在最中间的一颗，而这颗肯定会放在最后，我们只要将这颗珠子放在后半部分的第一个，这样后半部分反转后它即为这一半的最后一颗，在拼接时，由于后半部分晚于前半部分，所以这颗珠子肯定会是最后一个。<br>　　代码如下：</p>
@@ -1028,178 +1144,6 @@ L+(m+L+x-L)\%C\\
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/27/链表啊，链表！-3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Leetcode之旅-链表啊，链表！" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/17/Leetcode之旅-链表啊，链表！/">Leetcode之旅|链表啊，链表！(1)</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/17/Leetcode之旅-链表啊，链表！/" class="archive-article-date">
-  	<time datetime="2018-01-18T06:12:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>　　自从前两天刷了那道链表的题之后觉得很有意思，奇妙的数据结构哇咔咔 ~ ~ ~ 但毕竟不是科班出身，对它的一些操作非常不熟悉，每次被各种head,tail,pre,next指来指去的东西绕得晕头转向。嗯，熟能生巧，所以我最近专注于刷链表相关的题目啊哈哈 ~ ~ ~</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>　　这篇博客回顾的题目是删除链表中重复元素的问题（链表均已排好序）：</p>
-<p>　　基础版：只删除重复了的元素，即保证唯一性 （<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/" target="_blank" rel="noopener">Leetcode Problem 83</a> ）。</p>
-<p>　　进阶版：删除有重复出现过的元素，即如果元素重复了，就将其从链表中剔除 （<a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii" target="_blank" rel="noopener">Leetcode Problem 82</a> ）。</p>
-<p>　　发现我的语言很苍白，还是看实例吧：</p>
-<p>　　基础包：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Given 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5, return 1-&gt;2-&gt;5.</span><br><span class="line">Given 1-&gt;1-&gt;1-&gt;2-&gt;3, return 2-&gt;3.</span><br></pre></td></tr></table></figure>
-<p>　　升级包：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Given 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5, return 1-&gt;2-&gt;5.</span><br><span class="line">Given 1-&gt;1-&gt;1-&gt;2-&gt;3, return 2-&gt;3.</span><br></pre></td></tr></table></figure>
-<h2 id="解题思路及相关代码"><a href="#解题思路及相关代码" class="headerlink" title="解题思路及相关代码"></a>解题思路及相关代码</h2><h3 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h3><p>　　对于基础包而言，我们只需要一个指针，即下面代码中的cur，从head开始挨个遍历链表节点（所以链表已经排序好这个前提很重要），对于每个cur，将其与其后继的节点值比较，如果相同，说明这个后继需要删除，对链表而言，操作则相当简单，直接将cur的后继改为当前后继的后继即可。如果不同，说明没有与当前节点值重复的了，直接将当前节点后移即可，即将cur更新为当前节点的后继。<br>　　代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deleteDuplicates</span><span class="params">(head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># 链表为空的特殊情况</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        <span class="comment"># 当前节点初始化为表头</span></span><br><span class="line">        cur = head</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 遍历，循环条件为当前节点和当前节点的后继不为空</span></span><br><span class="line">        <span class="keyword">while</span> cur <span class="keyword">and</span> cur.next:</span><br><span class="line">            <span class="comment"># 如果当前节点值和其后继值相等，则将其后继改为后继的后继</span></span><br><span class="line">            <span class="keyword">if</span> cur.val == cur.next.val:</span><br><span class="line">                cur.next = cur.next.next</span><br><span class="line">            <span class="comment"># 如果不相等，则将当前节点更新</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur = cur.next</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2018/01/17/Leetcode之旅-链表啊，链表！/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data Structure</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/17/Leetcode之旅-链表啊，链表！/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Gap-Gap-Gap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/16/Gap-Gap-Gap/">Gap Gap Gap</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/16/Gap-Gap-Gap/" class="archive-article-date">
-  	<time datetime="2018-01-17T06:59:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=32419802&auto=1&height=66"></iframe>
-
-<p>　　从博客搭建以来，每更新一篇都觉得压力重重：好像不能胡说，不能乱写，不能不严谨，不能不科学。直到昨天博客因为我的失误崩溃了，才意识到：这是我的个人blog，其实我可以写任何我想记录的事物，哪怕很感性，哪怕不够有格调。毕竟，本来就是为了好玩，为了“迹录”，何必给自己太多条条框框呢？</p>
-<p>　　庆幸的是，今天把博客抢修回来了。在修补的间隙，和上司长谈了一番，也是一时没忍住。虽然说出来并没有让我轻松多少，但也算是心平气和地收场。希望不后悔自己的决定，但愿在这之前我能为此努力。Gap Gap Gap year!</p>
-<p>　　总归是有舍才有得。其实这篇博客是为了测试添加音乐播放器的功能哈哈哈(所以这么言之无物),挑了首Por Una Cabeza (一步之遥)，不过因为版权保护，能生成外链播放的不多，这是我在不多的选择中挑出来比较好听的一个版本，听着能感受到tango的那种缠绵又对抗的挣扎感。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/16/Gap-Gap-Gap/">展开全文 >></a>
         </p>
       
 
@@ -1339,15 +1283,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1411,6 +1355,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
               </li>
              
@@ -1419,7 +1371,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">backend</a>
               </li>
             
             <div class="clearfix"></div>

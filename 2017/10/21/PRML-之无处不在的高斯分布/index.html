@@ -212,7 +212,7 @@
 <p>$\Sigma$：$D\times D$的协方差矩阵(covariance matrix)，$\Sigma_{ij}=(x_i-\mu_i)(x_j-\mu_j)$。</p>
 <p>我们可以从$N(x|\mu, \Sigma)$中的指数项出发，理解多元高斯分布的几何意义。</p>
 <p>首先，我们来看一下这个指数项  $\Delta^2 = (x-\mu)^T\Sigma^{-1}(x-\mu)$，发现其中主要包含两部分：一个是协方差矩阵$\Sigma$，一个是平移后的$x$。</p>
-<p>若$\Sigma$有D个特征值$\lambda<em>1,\lambda_2,…,\lambda_D$，其对应的特征向量为$u_1, u_2, …, u_D$，则$$\Sigma = \sum</em>{i=1}^{D}\lambda_iu_iu_i^T$$<br>其中，若所有$\lambda_i$都大于0，则说$\Sigma$是正定的(positive definite);若存在$\lambda_i = 0$,则说该分布是奇异的，说明其可以在低维子空间表达；若所有$\lambda$非负，则说明$\Sigma$是半正定的(positive semidefinite)。</p>
+<p>若$\Sigma$有D个特征值$\lambda_1,\lambda_2,…,\lambda_D$，其对应的特征向量为$u_1, u_2, …, u_D$，则<script type="math/tex">\Sigma = \sum_{i=1}^{D}\lambda_iu_iu_i^T</script><br>其中，若所有$\lambda_i$都大于0，则说$\Sigma$是正定的(positive definite);若存在$\lambda_i = 0$,则说该分布是奇异的，说明其可以在低维子空间表达；若所有$\lambda$非负，则说明$\Sigma$是半正定的(positive semidefinite)。</p>
 <p>$u_i$满足正交归一条件，即:</p>
 <script type="math/tex; mode=display">
 u_i^Tu_j=I_{ij}=
@@ -228,7 +228,7 @@ u_i^Tu_j=I_{ij}=
 \begin{equation}
 \Delta^2 = \sum_{i=1}^{D}\lambda_i^{-1}y_i^Ty_i=\sum_{i=1}^{D}\lambda_i^{-1}y_i^2
 \end{equation}</script><p>可见指数项由向量计算变成了普通的数值计算。可以看出，$y_i$就是$u_i$与$x-\mu$的向量内积，也可以看作向量$x$先进行平移将重心移到原点变成$(x-\mu)$，而后在基矢$u_i$上的投影值。因此，$y = (y_1,y_2,…,y_D)^T$ 可看作$x-\mu$在基矢$U$张成的线性空间的新坐标值。所以从$x$到$y$是做了个线性变换，$y = U^T(x-\mu), x= Uy+\mu$。</p>
-<p>从$x$到$y$的坐标系统，其Jacobi矩阵为$J<em>{ij} = \frac{\partial x_i}{\partial y_j}=U</em>{ij}$,$|J|^2 = |U|^2 = 1$, $|J| =1$。</p>
+<p>从$x$到$y$的坐标系统，其Jacobi矩阵为$J_{ij} = \frac{\partial x_i}{\partial y_j}=U_{ij}$,$|J|^2 = |U|^2 = 1$, $|J| =1$。</p>
 <p>在$y$的坐标系统中，其分布为:</p>
 <script type="math/tex; mode=display">
 \begin{equation}
@@ -580,15 +580,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,6 +652,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
               </li>
              
@@ -660,7 +668,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">backend</a>
               </li>
             
             <div class="clearfix"></div>

@@ -188,7 +188,7 @@
 <ul>
 <li><p>所谓局部线性，就是认为在整个数据集的某小范围内，数据是线性的，就比如虽然地球是圆的，但我们还是可以认为我们的篮球场是个平面；而这个“小范围”，最直接的办法就是k-近邻原则。这个“近邻”的判断也可以是不同的依据：比如欧氏距离，测地距离等。</p>
 </li>
-<li><p>既然是线性，那么对每个数据点$x<em>i$(D维数据，即$D\times 1$的列向量)，可以用其k近邻的数据点的线性组合来表示，即$x_i = \sum</em>{j=1}^{k}w<em>{ji}x</em>{ji}$。其中，$w<em>i$是$k\times 1$的列向量，$w</em>{ji}$是$w<em>i$的第$j$行,$x</em>{ji}$是$x_i$的第j个近邻点。</p>
+<li><p>既然是线性，那么对每个数据点$x_i$(D维数据，即$D\times 1$的列向量)，可以用其k近邻的数据点的线性组合来表示，即$x_i = \sum_{j=1}^{k}w_{ji}x_{ji}$。其中，$w_i$是$k\times 1$的列向量，$w_{ji}$是$w_i$的第$j$行,$x_{ji}$是$x_i$的第j个近邻点。</p>
 </li>
 </ul>
 <ul>
@@ -218,7 +218,7 @@
 <script type="math/tex; mode=display">\arg \min \limits_{Y} \Psi(Y) = \sum_{i=1}^N\|y_i - \sum_{j=1}^k w_{ji}y_{ji}\|^2, s.t. \sum_{i=1}^N y_i = 0, \sum_{i=1}^N y_i y_i^T = NI_{d\times d}</script><p>　　</p>
 <p>　　低维空间向量：$Y = [y_1, y_2, …, y_N], d\times N$</p>
 <p>首先，用一个$N\times N$的稀疏矩阵(sparse matrix)$W$来表示$w$:</p>
-<p>　　　　　对$i$的近邻点j：   $W<em>{ji} = w</em>{ji}$;</p>
+<p>　　　　　对$i$的近邻点j：   $W_{ji} = w_{ji}$;</p>
 <p>　　　　　否则:   $W_{ji} = 0$</p>
 <p>因此：</p>
 <script type="math/tex; mode=display">\sum_{j=1}^k w_{ji}y_{ji} = YW_i</script><p>$W_i$是$W$方阵的第$i$列。所以</p>
@@ -506,15 +506,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,6 +578,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
               </li>
              
@@ -586,7 +594,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">降维算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">database</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">backend</a>
               </li>
             
             <div class="clearfix"></div>

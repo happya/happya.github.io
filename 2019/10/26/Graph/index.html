@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/10 | 福尔摩狮的博客</title>
+  <title>数据结构之——图（上） | 福尔摩狮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="福尔摩狮的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
+  <meta name="description" content="导读 什么是图？图的存储方式？ 图的遍历（深度优先搜索，广度优先搜索） 最短路径    1. 什么是图？图的存储方式　　前面总结了“树”这种数据结构，而这篇博客总结的是更为复杂的一种数据结构：图（graph），它表明了物件与物件之间的“多对多”的一种复杂关系。图包含了两个基本元素：顶点（vertex, 简称$V$）和边（edge,简称$E$）。 有向图与无向图 　　如果给图的每条边规定一个方向，那">
+<meta name="keywords" content="Data Structure,Algorithm,Graph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之——图（上）">
+<meta property="og:url" content="http://yoursite.com/2019/10/26/Graph/index.html">
 <meta property="og:site_name" content="福尔摩狮的博客">
+<meta property="og:description" content="导读 什么是图？图的存储方式？ 图的遍历（深度优先搜索，广度优先搜索） 最短路径    1. 什么是图？图的存储方式　　前面总结了“树”这种数据结构，而这篇博客总结的是更为复杂的一种数据结构：图（graph），它表明了物件与物件之间的“多对多”的一种复杂关系。图包含了两个基本元素：顶点（vertex, 简称$V$）和边（edge,简称$E$）。 有向图与无向图 　　如果给图的每条边规定一个方向，那">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-f621ea50fcfc2b10c7d83e95cf7455f7_b.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-1ea95bbee43e79bd1685dafda2f5f109_b.jpg">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=V%5E2">
+<meta property="og:updated_time" content="2019-11-04T21:21:23.504Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="福尔摩狮的博客">
+<meta name="twitter:title" content="数据结构之——图（上）">
+<meta name="twitter:description" content="导读 什么是图？图的存储方式？ 图的遍历（深度优先搜索，广度优先搜索） 最短路径    1. 什么是图？图的存储方式　　前面总结了“树”这种数据结构，而这篇博客总结的是更为复杂的一种数据结构：图（graph），它表明了物件与物件之间的“多对多”的一种复杂关系。图包含了两个基本元素：顶点（vertex, 简称$V$）和边（edge,简称$E$）。 有向图与无向图 　　如果给图的每条边规定一个方向，那">
+<meta name="twitter:image" content="https://pic4.zhimg.com/v2-f621ea50fcfc2b10c7d83e95cf7455f7_b.jpg">
   
     <link rel="alternative" href="/atom.xml" title="福尔摩狮的博客" type="application/atom+xml">
   
@@ -154,64 +163,288 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Graph" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/21/PRML-之无处不在的高斯分布/" class="archive-article-date">
-  	<time datetime="2017-10-22T06:50:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-21</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/21/PRML-之无处不在的高斯分布/">PRML 之无处不在的高斯分布</a>
+    <h1 class="article-title" itemprop="name">
+      数据结构之——图（上）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/10/26/Graph/" class="archive-article-date">
+  	<time datetime="2019-10-27T00:28:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><ol>
+<li>什么是图？图的存储方式？</li>
+<li>图的遍历（深度优先搜索，广度优先搜索）</li>
+<li>最短路径  </li>
+</ol>
+<h2 id="1-什么是图？图的存储方式"><a href="#1-什么是图？图的存储方式" class="headerlink" title="1. 什么是图？图的存储方式"></a>1. 什么是图？图的存储方式</h2><p>　　前面总结了“树”这种数据结构，而这篇博客总结的是更为复杂的一种数据结构：图（graph），它表明了物件与物件之间的<strong>“多对多”</strong>的一种复杂关系。图包含了两个基本元素：顶点（vertex, 简称$V$）和边（edge,简称$E$）。</p>
+<p><strong>有向图与无向图</strong></p>
+<p>　　如果给图的每条边规定一个方向，那么得到的图称为<strong>有向图</strong>。在有向图中，从一个顶点出发的边数称为该点的<strong>出度</strong>，而指向一个顶点的边数称为该点的<strong>入度</strong>。相反，边没有方向的图称为<strong>无向图</strong>。</p>
+<p><strong>有权图与无权图</strong></p>
+<p> 　　如果图中的边有各自的权重，得到的图是<strong>有权图</strong>。比如地铁路线图，连接两站的边的权重可以是距离，也可以是价格，或者其他。反之，如果图的边没有权重，或者权重都一样（即没有区分），称为<strong>无权图</strong>。</p>
+<p><strong>连通图</strong></p>
+<p>　　如果图中任意两点都是连通的，那么图被称作<strong>连通图</strong>。图的连通性是图的基本性质。无向图中的一个极大连通子图称为其的一个连通分量。有向图中，如果对任意两个顶点 $V_i$ 与 $V_j$ 都存在 $i$ 到 $j$ 以及 $j$ 到 $i$ 的路径，则称其为<strong>强连通图</strong>，对应有<strong>强连通分量</strong>的概念。</p>
+<p><strong>图的存储</strong></p>
+<p>　　常用的存储方式有两种<strong>：邻接矩阵和邻接表。</strong></p>
+<a id="more"></a>
+<p><strong>邻接矩阵</strong></p>
+<p> 　　采用一个大小为 $V\times V$ 的矩阵 $G$ ，对于有权图， $G_{ij}$ 可以表示$V_i$ 到 $V_j$的边的权重，如果是无权图，则可设为1表示存在边，0表示不存在边。因此邻接矩阵的表示相当的直观，而且对于查找某一条边是否存在、权重多少非常快。但其比较浪费空间，对稠密图（ $E&gt;&gt;V$ ）来说，会比较适合。</p>
+<p>　　一般情况下我用的邻接矩阵的结构和初始化代码如下，具体会根据使用需求有所改动。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> Nv; <span class="comment">// number of vertices</span></span><br><span class="line">	<span class="keyword">int</span> Ne; <span class="comment">// number of edges</span></span><br><span class="line">	<span class="keyword">int</span> G[MaxVNum][MaxVNum];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">GNode</span> *<span class="title">MGraph</span>;</span></span><br><span class="line">MGraph Graph = <span class="keyword">new</span> GNode[MaxVNum];</span><br><span class="line"> </span><br><span class="line"><span class="comment">//  Initialize a graph</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitGraph</span><span class="params">(<span class="keyword">int</span> N,<span class="keyword">int</span> E)</span></span>&#123;</span><br><span class="line">	Graph-&gt;Nv = N;</span><br><span class="line">	Graph-&gt;Ne = E;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> u=<span class="number">0</span>;u&lt;=N;u++)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> v=<span class="number">0</span>;v&lt;=N;v++)</span><br><span class="line">			Graph-&gt;G[u][v]=INF;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Insert an edge (has weight but no direction)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> weight)</span></span>&#123;</span><br><span class="line">	Graph-&gt;G[u][v]= weight;</span><br><span class="line">	Graph-&gt;G[v][u]=weight;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>邻接表</strong></p>
+<p>$G$ 为一个大小为 $V$ 的指针数组， 对应每行存储一个链表，如$G[i]$ 中存储从顶点 $i$ 出发的边，如从顶点1出发的边有 $E_{13}$  和 $E_{15}$ 其在$G[1]$ 中存储的形式如下图所示。<strong>邻接表比较适合稀疏图</strong>（ V+2E ）。</p>
+<p><img src="https://pic4.zhimg.com/v2-f621ea50fcfc2b10c7d83e95cf7455f7_b.jpg" alt="img"></p>
+<p><strong>邻接表存储图</strong></p>
+<p>　　另外，之前做习题的时候也会习惯用个二维数组来存储邻接表，比如上面的$G[1] = [3,5]$ 。</p>
+<p>　　一般情况下我用的代码如下，会根据具体需求有大改动。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span> *<span class="title">AdjNode</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">VNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> node;</span><br><span class="line">	AdjNode next;</span><br><span class="line">&#125;;</span><br><span class="line">AdjNode Graph = <span class="keyword">new</span> VNode[MaxV];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitGraph</span><span class="params">(<span class="keyword">int</span> N,<span class="keyword">int</span> E)</span></span>&#123;</span><br><span class="line">	Graph-&gt;Nv = N;</span><br><span class="line">	Graph-&gt;Ne = E;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line"></span><br><span class="line">		(Graph+i)-&gt;node=i;</span><br><span class="line">		(Graph+i)-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// insert a directed edge</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertEdge</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">	AdjNode tmp1=<span class="keyword">new</span> VNode;</span><br><span class="line">	AdjNode tmp2 = <span class="keyword">new</span> VNode;</span><br><span class="line">	tmp1-&gt;node = v;</span><br><span class="line">	tmp1-&gt;next = (Graph+u)-&gt;next;</span><br><span class="line">	(Graph+u)-&gt;next=tmp1;</span><br><span class="line">	tmp2-&gt;node = u;</span><br><span class="line">	tmp2-&gt;next = (Graph+v)-&gt;next;</span><br><span class="line">	(Graph+v)-&gt;next=tmp2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-图的遍历"><a href="#2-图的遍历" class="headerlink" title="2. 图的遍历"></a>2. 图的遍历</h2><p> 　　图的遍历最常用的有两种：<strong>深度优先搜索</strong>（Depth-first Search, DFS）和<strong>广度优先搜索</strong>（Breadth-First Search, BFS）。</p>
+<h3 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h3><blockquote>
+<p>　　有点类似于树的前序遍历，即从一个选定的点出发，选定与其直接相连且<strong>未被访问过</strong>的点走过去，然后再从这个当前点，找与其直接相连且<strong>未被访问过</strong>的点访问，每次访问的点都标记为<strong>“已访问”</strong>，就这么一条道走到黑，直到没法再走为止。没法再走怎么办呢？从当前点退回其“来处”的点，看是否存在与这个点直接相连且未被访问的点。重复上述步骤，直到没有未被访问的点为止。</p>
+</blockquote>
+<p>　　从上述文字表述可以看出，DFS很适合使用递归，其代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> visited[MaxN]=&#123;<span class="number">0</span>&#125;; <span class="comment">//记录顶点的访问状态</span></span><br><span class="line"><span class="keyword">int</span> result[MaxN]; <span class="comment">//result数组记录DFS遍历结果</span></span><br><span class="line"><span class="keyword">int</span> N,E,k;<span class="comment">// N为顶点数，E为边数，k记录遍历结果下标</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">	visited[v]=<span class="number">1</span>;</span><br><span class="line">	result[k++]=v;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (G[v][i]==<span class="number">1</span> &amp;&amp; visited[i]==<span class="number">0</span>)</span><br><span class="line">			DFS(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">		k = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (visited[i]==<span class="number">0</span>)&#123;</span><br><span class="line">			DFS(i);</span><br><span class="line">                 <span class="comment">//用&#123;&#125;打印出一个连通分量</span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"&#123; "</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;k;j++)</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;result[j]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"&#125;"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h3><blockquote>
+<p>　　有点类似于树的层序遍历，也就是像剥洋葱一样，“一层一层地剥开♩♩♩”。即从一个选定的点出发，将与其直接相连的点都收入囊中，然后依次对这些点去收与其直接相连的点。重复到所有点都被访问然后结束。</p>
+</blockquote>
+<p>　　类似树的层序遍历，BFS同样可以通过一个队列来实现，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> visited[MaxN]=&#123;<span class="number">0</span>&#125;; <span class="comment">//记录顶点的访问状态</span></span><br><span class="line"><span class="keyword">int</span> result[MaxN]; <span class="comment">//result数组记录BFS遍历结果</span></span><br><span class="line"><span class="keyword">int</span> N,E,k;<span class="comment">// N为顶点数，E为边数，k记录遍历结果下标</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	q.push(v);</span><br><span class="line">	visited[v]=<span class="number">1</span>;</span><br><span class="line">	result[k++]=v;</span><br><span class="line">	<span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">		<span class="keyword">int</span> u = q.front();</span><br><span class="line">		q.pop();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (G[u][i]!=<span class="number">0</span> &amp;&amp; visited[i]!=<span class="number">1</span>)&#123;</span><br><span class="line">				visited[i]=<span class="number">1</span>;</span><br><span class="line">				q.push(i);</span><br><span class="line">				result[k++]=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">		k = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (visited2[i]==<span class="number">0</span>)&#123;</span><br><span class="line">			BFS(i);</span><br><span class="line">                      <span class="comment">//用&#123;&#125;打印出一个连通分量</span></span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"&#123; "</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;k;j++)</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;result[j]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"&#125;"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>上述BFS和DFS的时间复杂度均为 O(V+E) </strong>。</p>
+<h2 id="3-最短路径"><a href="#3-最短路径" class="headerlink" title="3. 最短路径"></a>3. 最短路径</h2><p> 　　简而言之，最短路径就是找图中连接两个顶点所有边权重和最小的路径。</p>
+<ul>
+<li>对无权图而言，即是找边最小的路径；</li>
+<li>如果给定起点，则是单源最短路径，即从一固定起点到任意终点的最短路径；</li>
+<li>如果起点不确定，则是多源最短路径，即求任意两个顶点的最短路径。</li>
+</ul>
+<h3 id="3-1-单源最短路径"><a href="#3-1-单源最短路径" class="headerlink" title="3.1 单源最短路径"></a>3.1 单源最短路径</h3><p>　　对于无向图而言，可以借助BFS的“剥洋葱”特性，看从起点到终点需要剥几个洋葱圈，剥的层数即是最短路径长度。</p>
+<p>　　对于有向图而言，就不得不提到一个煊赫的名字：<strong>Dijkstra算法</strong>。陆续泛听了几个版本的数据结构，这个名字简直太深入人心。</p>
+<ul>
+<li><p><strong>Dijkstra算法</strong></p>
+<p>　　具体来说<strong>，</strong>Dijkstra算法的核心在于：从起点（或者说源点）开始，将其装进一个“袋子”里，然后不断往这个袋子里搜罗顶点，当顶点收进去后，能保证从源点到该顶点的当前最短路径是确定的。每次收录的顶点是在<strong>未收录的集合</strong>里寻找最短路径最小的点（即离源点最近的点），然后将与收进去的顶点直接相连的点的最短路径进行更新。</p>
+</li>
+</ul>
+<p>　　如下图所示， $V_i$ 是新鲜被收录的点， $V_m, V_n, V_p$等是和 $V_i$ 有直接相连的边的点，那么这些点的距离会在 $V_i$ 收录后立马被更新。可以看出，<strong>Dijkstra算法本质上其实是个动态规划的过程</strong>。</p>
+<p>　　值得注意的是：<strong>Dijkstra算法不适用于存在负权重边的图。</strong></p>
+<p><img src="https://pic2.zhimg.com/v2-1ea95bbee43e79bd1685dafda2f5f109_b.jpg" alt="img"></p>
+<p>　　给出Dijkstra代码前先对保存最短路径的数组<code>dist[]</code>和收录状态的数组<code>collected[]</code>进行初始化：</p>
+<ul>
+<li>和源点直接相连的点的最短路径即为该边的权重，其余均初始化为一个很大的（一看就不可能的数）<code>INF</code>;</li>
+<li><code>collected</code> 中所有值初始化为 <code>false</code>。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist[MaxN];</span><br><span class="line"><span class="keyword">bool</span> collected[MaxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitDist</span><span class="params">(<span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;Graph-&gt;Nv;i++)&#123;</span><br><span class="line">		dist[i]=Graph-&gt;G[start][i];</span><br><span class="line">		collected[i]=<span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　然后，我们需要寻找下一步被收录的点：<strong>即在所有未被收录的点中寻找dist最小的点</strong>。</p>
+<ul>
+<li>如果不存在（最小值为无穷大INF），则返回错误标识-1。<ul>
+<li>这一步找最小值，我们可以每次都将所有顶点扫描一遍获得，也可以很自然地想到将 <code>dist</code> 存在一个最小堆（优先队列）里。</li>
+<li>对于前者，因为每次收录都要扫描一次所有顶点，有 <img src="https://www.zhihu.com/equation?tex=V%5E2" alt="V^2">$V^2$ 复杂度，然后每条边都会扫描一次，时间复杂度为 $O(V^2+E)$ 。</li>
+<li>对于后者，每次收录时找到目标的时间为$logV$ ，有 $VlogV$ 复杂度，而每次扫描边然后更新dist的时间也是 $logV$ ，有 $ElogV$复杂度，所以总的复杂度为 $O((V+E)logV)$ 。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMinDist</span><span class="params">(<span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> MinD = INF;</span><br><span class="line">	<span class="keyword">int</span> MinV;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> end =<span class="number">0</span>;end&lt;Graph-&gt;Nv;end++)&#123;</span><br><span class="line">			<span class="keyword">if</span> (collected[end]==<span class="literal">false</span> &amp;&amp; dist[end]&lt;MinD)&#123;</span><br><span class="line">				MinD=dist[end];</span><br><span class="line">				MinV=end;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (MinD&lt;INF)</span><br><span class="line">		<span class="keyword">return</span> MinV;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　然后是Dijkstra算法主程序：</p>
+<ul>
+<li>在初始化后，先将源点收录进袋，并且源点的最短路径设为0, 然后开始循环寻找能被收录的点：<ul>
+<li>如果接受到的是错误标识-1，说明找不到符合要求的点了，程序结束。</li>
+<li>如果找到了，则先将这个点收录进去，记录为<code>s</code>； 然后遍历从s出发的所有边，对没有收录的点，更新他们的最小路径值。</li>
+<li>更新的依据是：如果这个点<code>t</code>的当前的最小路径值，大于<code>s</code>点的最小路径值与<code>s</code>到<code>t</code>边的权重值之和，则更新为 <code>dist[s]+Graph[s][t]</code> ，否则维持原状。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">	InitDist(start);</span><br><span class="line">	dist[start]=<span class="number">0</span>;</span><br><span class="line">	collected[start]=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">int</span> s;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">		s = findMinDist(start);</span><br><span class="line">		<span class="keyword">if</span> (s==<span class="number">-1</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		collected[s]=<span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> t=<span class="number">0</span>;t&lt;Graph-&gt;Nv;t++)&#123;</span><br><span class="line">		        <span class="comment">// if W is not collected and s-&gt;t exists</span></span><br><span class="line">			<span class="keyword">if</span> (collected[t]==<span class="literal">false</span> &amp;&amp; Graph-&gt;G[s][t]&lt;INF)&#123;</span><br><span class="line">                                <span class="comment">// check  if it is a negative-weighted edge</span></span><br><span class="line">                              <span class="keyword">if</span> (Graph-&gt;G[s][t]&lt;<span class="number">0</span>)   <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                               <span class="comment">// check if dist[t] needs update</span></span><br><span class="line">				<span class="keyword">if</span> (dist[t]&gt;dist[s]+Graph-&gt;G[s][t])</span><br><span class="line">					dist[t]=dist[s]+Graph-&gt;G[s][t];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-多源最短路径"><a href="#3-2-多源最短路径" class="headerlink" title="3.2  多源最短路径"></a>3.2  多源最短路径</h3><p>　　按照上面已有的Djikstra算法，可以直接将Djikstra算法在每个顶点调用一遍，然后找最小值。时间复杂度为：</p>
+<blockquote>
+<p>直接找dist最小： $O(V^3+VE)$ 。</p>
+<p>最小堆维护dist： $O((V^2+VE)logV)$ 。</p>
+</blockquote>
+<p>　　另外还有一种更为直接的算法是<strong>Floyd</strong>算法，且代码看着简洁直观优美。。。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Floyd</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j, k;</span><br><span class="line">	<span class="keyword">for</span> (k=<span class="number">0</span>;k&lt;Graph-&gt;Nv;k++)</span><br><span class="line">		<span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;Graph-&gt;Nv;i++)</span><br><span class="line">			<span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;Graph-&gt;Nv;j++)</span><br><span class="line">				<span class="keyword">if</span> (dist[i][k]+dist[k][j]&lt;dist[i][j])&#123;</span><br><span class="line">					dist[i][j]=dist[i][k]+dist[k][j];</span><br><span class="line">					<span class="keyword">if</span> (i==j &amp;&amp; dist[i][j]&lt;<span class="number">0</span>) <span class="comment">//发现负值回路</span></span><br><span class="line">						<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">				&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　三重循环嵌套，可以直观看出时间复杂度为 $O(V^3)$ 。意思也很明白，对于每对源点<code>i</code>和终点<code>ｊ</code>，找一个跳板<code>ｋ</code>，看是否经过跳板<code>k</code>距离会比现有的从<code>i</code>到<code>j</code>的距离短，如果是，则更新；否则不作为。发现负值回路的话解不存在，错误返回。</p>
+<p>参考资料：</p>
+<ol>
+<li>coursera的《算法分析与设计》（以前的课程）</li>
+<li>MOOC网的《<a href="https://www.icourse163.org/learn/ZJU-93001?tid=1002654021" target="_blank" rel="noopener">数据结构与算法</a>》</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><p>　　距离上次更新已经有很长的时间，一方面是因为没整理好，包括现在记录的也觉得很混乱，就这么先把笔记记下来吧，不然时间久了更迷糊。另一方面是身体原因，年纪轻轻竟然椎间盘膨出了，不知道知乎上有没有啥治疗良方，反正去了好几次医院都说没事，直到痛得不行让拍CT了才知道是腰椎间盘膨出☹☹☹</p>
+<p>　　　扯远了❦❦❦，剩下还有一些最小生成树，和拓扑排序啥的等我更明白点再写吧~~~</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thanks!<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data Structure</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">读书笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Graph</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/26/Graph/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/04/nodejs1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          nodejs+Express+mongodb搭建个人博客体验（1）
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/10/22/Huffman/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">哈夫曼编码及其实现</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -234,8 +467,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
