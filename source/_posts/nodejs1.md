@@ -7,13 +7,7 @@ tags:
 - backend
 ---
 
-## nodejs+Express+mongodb搭建个人博客体验
 
-
-
-​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～
-
-------
 
 ## 1. 目标
 
@@ -332,4 +326,3 @@ var Article=model.Article;
 ```
 
 
-  
