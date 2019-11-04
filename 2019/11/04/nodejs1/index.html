@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>nodejs+Express+mongodb搭建个人博客体验（1） | 福尔摩狮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="nodejs+Express+mongodb搭建个人博客体验​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～  1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章">
+  <meta name="description" content="1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章  2. 工欲善其事，必先利其器——环境搭建2.1 安装nodejs  我是windows系统，直接去官网下载，安装即可，安装完毕后打开cmd窗口，输入npm -">
 <meta name="keywords" content="node.js,database,backend">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs+Express+mongodb搭建个人博客体验（1）">
 <meta property="og:url" content="http://yoursite.com/2019/11/04/nodejs1/index.html">
 <meta property="og:site_name" content="福尔摩狮的博客">
-<meta property="og:description" content="nodejs+Express+mongodb搭建个人博客体验​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～  1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章">
+<meta property="og:description" content="1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章  2. 工欲善其事，必先利其器——环境搭建2.1 安装nodejs  我是windows系统，直接去官网下载，安装即可，安装完毕后打开cmd窗口，输入npm -">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-de502b50405eedfdb79c77e940b91368_b.png">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-5357e75d4d0b293af5f06d46732afe95_b.png">
@@ -22,10 +22,10 @@
 <meta property="og:image" content="https://pic2.zhimg.com/v2-8a319b26eb20aae59d5035158b12159d_b.png">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-b6c6232412582e8da3c6f15608d1a9d3_b.png">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-751daf946fa91eadd07656e8ab644b34_b.png">
-<meta property="og:updated_time" content="2019-11-04T21:20:53.420Z">
+<meta property="og:updated_time" content="2019-11-04T21:23:37.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs+Express+mongodb搭建个人博客体验（1）">
-<meta name="twitter:description" content="nodejs+Express+mongodb搭建个人博客体验​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～  1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章">
+<meta name="twitter:description" content="1. 目标这个项目主要是开发一个简单的多人博客系统，其基本功能如下：   用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息 文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章  2. 工欲善其事，必先利其器——环境搭建2.1 安装nodejs  我是windows系统，直接去官网下载，安装即可，安装完毕后打开cmd窗口，输入npm -">
 <meta name="twitter:image" content="https://pic1.zhimg.com/v2-de502b50405eedfdb79c77e940b91368_b.png">
   
     <link rel="alternative" href="/atom.xml" title="福尔摩狮的博客" type="application/atom+xml">
@@ -186,9 +186,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="nodejs-Express-mongodb搭建个人博客体验"><a href="#nodejs-Express-mongodb搭建个人博客体验" class="headerlink" title="nodejs+Express+mongodb搭建个人博客体验"></a>nodejs+Express+mongodb搭建个人博客体验</h2><p>​    前几天学着用nodejs以及Express框架撸了个简易博客系统，写个笔记记录一下～</p>
-<hr>
-<h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1. 目标"></a>1. 目标</h2><p>这个项目主要是开发一个简单的多人博客系统，其基本功能如下： </p>
+        <h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1. 目标"></a>1. 目标</h2><p>这个项目主要是开发一个简单的多人博客系统，其基本功能如下： </p>
 <ul>
 <li>用户管理：用户可创建账号，登入和登出博客系统；且可创建多个用户，每个用户拥有自己的信息</li>
 <li>文章管理： 已经登录的用户，可以发表新文章，编辑和删除已有文章，以及查询文章</li>
