@@ -17,7 +17,7 @@
 <meta property="og:description" content="今天记录的是两道特别有意思的题：判断链表中存不存在环(circle)。为了找解法，在纸上画了各种数字、箭头、圈圈和推导，还以为在研究什么彩票号码呢哈哈 ~ ~ ~ 题目描述　　和昨天一样，今天的两道题同样是分为基础版和进阶版，不同的是，今天的两个版本可以看作是一道大题的两小问，二者关联性更强。  　　基础版：　　　　　　判断链表是否存在环。(141. Linked list cycle)">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/05/08/circled-list/circled.png">
-<meta property="og:updated_time" content="2019-10-22T18:27:06.129Z">
+<meta property="og:updated_time" content="2020-01-13T22:43:25.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode之旅|链表中的环">
 <meta name="twitter:description" content="今天记录的是两道特别有意思的题：判断链表中存不存在环(circle)。为了找解法，在纸上画了各种数字、箭头、圈圈和推导，还以为在研究什么彩票号码呢哈哈 ~ ~ ~ 题目描述　　和昨天一样，今天的两道题同样是分为基础版和进阶版，不同的是，今天的两个版本可以看作是一道大题的两小问，二者关联性更强。  　　基础版：　　　　　　判断链表是否存在环。(141. Linked list cycle)">
@@ -200,10 +200,12 @@ n=\left\{
 n, (n\le L) &\\
 L+(n-L)\% C,& (n>L) 
 \end{array}
-\right.</script><p>　　我们让<code>slow</code>和<code>fast</code>两个指针同时从<code>dummy</code>出发。当二者第一次相遇(meet)时，<code>slow</code>和<code>fast</code>分别走了$T​$和$2T​$步，那么二者相差的步数$T​$肯定是环内节点数$C​$的整数倍，即$T=iC,(i是正整数)​$。我们设它们相遇在第$M​$个节点，由于肯定在环内相遇，我们可以假设$M=L+x​$,其中$x​$为环内的那段。则有：</p>
+\right.</script><p>　　我们让<code>slow</code>和<code>fast</code>两个指针同时从<code>dummy</code>出发。当二者第一次相遇(meet)时，<code>slow</code>和<code>fast</code>分别走了$T$和$2T$步，那么二者相差的步数$T$肯定是环内节点数$C$的整数倍，即$T=iC,(i是正整数)$。我们设它们相遇在第$M$个节点，由于肯定在环内相遇，我们可以假设$M=L+x$,其中$x$为环内的那段。则有：</p>
 <script type="math/tex; mode=display">
-T = L+x+jC\\
-T = iC</script><p>因此$M=L+x$也必定是环节点数$C$的正整数倍</p>
+\begin{aligned}
+&T = L+x+jC\\
+&2T - T = iC
+\end{aligned}</script><p>因此$M=L+x$也必定是环节点数$C$的正整数倍</p>
 <script type="math/tex; mode=display">
 L+x=(i-j)C=kC</script><p>　　特殊情况下，$L=0$，即<code>head</code>即为环的入口，这种情况下，<code>slow</code>和<code>fast</code>必然相遇在环的入口，也就是<code>head</code>处，此时我们直接返回<code>head</code>即可。</p>
 <p>　　若$L\ne0$: 我们再设一个指针<code>_head</code>，初始为<code>dummy</code>,那么此时<code>slow</code>(或者<code>fast</code>,因为循环终止条件是二者相同)与<code>_head</code>的距离为$L+x=kC$。此时再分两种情况讨论。让<code>slow</code>和<code>_head</code>以相同的步数同时出发，可知，如果二者可以相遇，那么必定在<strong>环的入口</strong>。原因是：</p>
@@ -211,12 +213,16 @@ L+x=(i-j)C=kC</script><p>　　特殊情况下，$L=0$，即<code>head</code>即
 <p>一旦二者都在环内，且由于二者具有相同的速度，那么它们肯定不会相遇。</p>
 </blockquote>
 <p>　　下面我们证明二者相遇的必然性。假设<code>_head</code>和<code>slow</code>均前进了<code>m</code>步，且$m&gt;L$，则二者所在的节点数分别为：</p>
-<p><code>_head</code>: </p>
+<p><code>_head</code>: 根据</p>
 <script type="math/tex; mode=display">
-L+(m-L)\%C, L+x=kC \\
-=(m-kC+x)\%C</script><p><code>slow</code>:</p>
+L+(m-L)\%C, L+x=kC</script><p><code>_head</code>的位置：</p>
 <script type="math/tex; mode=display">
-L+(m+L+x-L)\%C\\
+\begin{aligned}
+pos &= L + (m-kC+x)\%C\\
+&= L + (m + x) \% C
+\end{aligned}</script><p><code>slow</code>: 其初始位置为$L+x$, 前进了$m$步， 其最终位置：</p>
+<script type="math/tex; mode=display">
+pos = L+(m+L+x-L)\%C\\
 =L+(m+x)\%C</script><p>　　由于只要保证相同的出发点，<code>slow</code>和<code>fast</code>之间的相对距离是不变的，在实际代码实现的时候，我们可以不必设置<code>dummy</code>，让二者之间初始化为<code>head</code>，使二者都从<code>head</code>出发，同样可以得出 结果。代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">detectCycle</span><span class="params">(head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        slow, fast = head, head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</span><br><span class="line">            slow = slow.next</span><br><span class="line">            fast = fast.next.next</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> slow == fast:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> fast <span class="keyword">or</span> <span class="keyword">not</span> fast.next:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> head == slow:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        _head = head</span><br><span class="line">        <span class="keyword">while</span> _head != slow:</span><br><span class="line">            _head = _head.next</span><br><span class="line">            slow = slow.next</span><br><span class="line">        <span class="keyword">return</span> _head</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　刷完链表就刷树和图吧，数据结构太有意思了。记得之前我关注的一个博主曾在合理使用堆栈给出某道题很elegant的解法时感慨：“啊，这就是数据结构的胜利！！！”而我目前还只是在练习一些很简单的操作，希望我以后也能将它们变为趁手的利刃吧。</p>
@@ -413,7 +419,7 @@ L+(m+L+x-L)\%C\\
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 lionust
+    		&copy; 2020 lionust
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
