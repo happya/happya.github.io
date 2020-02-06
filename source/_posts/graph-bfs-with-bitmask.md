@@ -38,6 +38,8 @@ newNode = (node << 16) | (1 << node);
 
 Solution: BFS + bitMask. Some nodes have to be re-visited because sometimes it is impossible to traverse all the nodes without heading back.
 
+<!-- more -->
+
 ```text
 class Solution {
    
