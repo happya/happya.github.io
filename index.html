@@ -156,6 +156,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-graph-bfs-with-bitmask" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/05/graph-bfs-with-bitmask/">graph-bfs-with-bitmask</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/05/graph-bfs-with-bitmask/" class="archive-article-date">
+  	<time datetime="2020-02-06T06:45:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h1 id="Graph-BFS-with-bitMask"><a href="#Graph-BFS-with-bitMask" class="headerlink" title="Graph BFS with bitMask"></a>Graph BFS with bitMask</h1><p>In ordinary BFS, we always use a <code>vector</code> (or array) to mark if a node is visited or not. However, in some problems, the re-visited is allowed, or sometimes we must revisit some nodes to get the solution. In this case, we can use a bitmap, combined with the node number, to create the new node id for the original node. So these new IDs not only contains the node number but also contains information like the path that gets to this node.</p>
+<h3 id="How-to-construct-the-new-node-ID"><a href="#How-to-construct-the-new-node-ID" class="headerlink" title="How to construct the new node ID?"></a>How to construct the new node ID?</h3><ol>
+<li>The most intuitive way is to construct a new class as below.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Node &#123;</span><br><span class="line">    int v;</span><br><span class="line">    int bitMask;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Then if we have a set called <code>visited</code>, instead of add the original node to <code>visited</code>, we insert the new <code>Node</code> to it. And to check if one node is visited, we have to check if the corresponding <code>Node</code> is visited, which means both the node and the <code>bitMask</code> have to be checked.</p>
+<ol>
+<li>The second way is to utilize the <code>32bit</code> feature of integer. If the node number is less than 16 (and represented by integer in [0, 15]), we can construct the node id as below.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newNode = (node &lt;&lt; 16) | (1 &lt;&lt; node);</span><br></pre></td></tr></table></figure>
+<h3 id="Real-Problems"><a href="#Real-Problems" class="headerlink" title="Real Problems"></a>Real Problems</h3><h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1"></a>Problem 1</h3><h4 id="847-Shortest-Path-Visiting-All-Nodes"><a href="#847-Shortest-Path-Visiting-All-Nodes" class="headerlink" title="847. Shortest Path Visiting All Nodes"></a><a href="https://leetcode.com/problems/shortest-path-visiting-all-nodes/" target="_blank" rel="noopener">847. Shortest Path Visiting All Nodes</a></h4><p>Solution: BFS + bitMask. Some nodes have to be re-visited because sometimes it is impossible to traverse all the nodes without heading back.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">   </span><br><span class="line">public:</span><br><span class="line">    int shortestPathLength(vector&lt;vector&lt;int&gt;&gt;&amp; graph) &#123;</span><br><span class="line">        int N = graph.size();</span><br><span class="line">        queue&lt;pair&lt;int,int&gt;&gt; q; // the queue for BFS</span><br><span class="line">        unordered_set&lt;int&gt; visited; // visited record</span><br><span class="line">        for(int i = 0; i &lt; N; i++)&#123;</span><br><span class="line">            int bitMask = (1 &lt;&lt; i);</span><br><span class="line">            q.emplace(i, bitMask); // both node and bitMask</span><br><span class="line">            visited.insert((i &lt;&lt; 16) | bitMask); // new node ID</span><br><span class="line">        &#125;</span><br><span class="line">        int fullMask = (1 &lt;&lt; N) - 1;</span><br><span class="line">        int level = 0;</span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            int sz = q.size();</span><br><span class="line">            for(int i = 0; i &lt; sz; i++)&#123;</span><br><span class="line">                int v = q.front().first;</span><br><span class="line">                int bitMask = q.front().second;</span><br><span class="line">                q.pop();</span><br><span class="line">                </span><br><span class="line">                if(bitMask == fullMask)</span><br><span class="line">                    return level;</span><br><span class="line">                for(auto&amp; w : graph[v])&#123;</span><br><span class="line">                    // The mask for w is get the mask for v</span><br><span class="line">                    // and add the visited bit for w</span><br><span class="line">                    // that is bitMask | (1 &lt;&lt; w)</span><br><span class="line">                    int nextMask = bitMask | (1 &lt;&lt; w); </span><br><span class="line">                    // construct the nodeID with node number</span><br><span class="line">                    // and mask</span><br><span class="line">                    int nodeId = ((w &lt;&lt; 16) | nextMask);</span><br><span class="line">                    // If this nodeId is visited,</span><br><span class="line">                    // it will not be consider again</span><br><span class="line">                    if(visited.find(nodeId) != visited.end())</span><br><span class="line">                        continue;</span><br><span class="line">                    q.emplace(w, nextMask);</span><br><span class="line">                    visited.insert(nodeId);</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            level++;</span><br><span class="line">        &#125;</span><br><span class="line">        return level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem 2"></a>Problem 2</h4><h4 id="864-Shortest-Path-to-get-all-keys"><a href="#864-Shortest-Path-to-get-all-keys" class="headerlink" title="864: Shortest Path to get all keys"></a><a href="https://leetcode.com/problems/shortest-path-to-get-all-keys/" target="_blank" rel="noopener">864: Shortest Path to get all keys</a></h4><p>Some nodes need to be revisited because sometimes we should first get keys and then get back to open the corresponding lockers.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    bool isValid(int x, int y, vector&lt;string&gt;&amp; grid)&#123;</span><br><span class="line">        if(x &lt; 0 || y &lt; 0 || x &gt;= grid.size() || y &gt;= grid[0].size() || grid[x][y] == &apos;#&apos;)</span><br><span class="line">            return false;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    int shortestPathAllKeys(vector&lt;string&gt;&amp; grid) &#123;</span><br><span class="line">        int m = grid.size();</span><br><span class="line">        int n = grid[0].size();</span><br><span class="line">        </span><br><span class="line">        queue&lt;pair&lt;int,int&gt;&gt; q;</span><br><span class="line">        int K = 0;</span><br><span class="line">        // visited to mark the state of owned keys</span><br><span class="line">        // at most keys, using bitmap, 111111 = 2^6 - 1, then total state is 64</span><br><span class="line">        vector&lt;vector&lt;vector&lt;bool&gt;&gt;&gt; visited(m, vector&lt;vector&lt;bool&gt;&gt;(n, vector&lt;bool&gt;(64, 0)));</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">            for(int j = 0; j &lt; n; j++) &#123;</span><br><span class="line">                if(grid[i][j] == &apos;@&apos;)&#123;</span><br><span class="line">                    q.push(&#123;i*n+j, 0&#125;);</span><br><span class="line">                    visited[i][j][0] = true;</span><br><span class="line">                &#125;</span><br><span class="line">                if(grid[i][j] &gt;= &apos;A&apos; &amp;&amp; grid[i][j] &lt;= &apos;F&apos;)</span><br><span class="line">                    K |= (1 &lt;&lt; (grid[i][j] - &apos;A&apos;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int d[4][2] = &#123;&#123;1, 0&#125;, &#123;-1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;</span><br><span class="line">        int path = 0;</span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            int sz = q.size();</span><br><span class="line">            for(int i = 0; i &lt; sz; i++)&#123;</span><br><span class="line">                int x = q.front().first / n;</span><br><span class="line">                int y = q.front().first % n;</span><br><span class="line">                int ownKeys = q.front().second;</span><br><span class="line">                q.pop();</span><br><span class="line"></span><br><span class="line">                // holding all keys</span><br><span class="line">                if (ownKeys == K)</span><br><span class="line">                    return path;</span><br><span class="line"></span><br><span class="line">                for(int j = 0; j &lt; 4; j++)&#123;</span><br><span class="line">                    int newX = x + d[j][0];</span><br><span class="line">                    int newY = y + d[j][1];</span><br><span class="line">                    int k = ownKeys;</span><br><span class="line">                    if(!isValid(newX, newY, grid))</span><br><span class="line">                        continue;</span><br><span class="line">                    </span><br><span class="line">                    char c = grid[newX][newY];</span><br><span class="line">                    // found key: update k</span><br><span class="line">                    if(c &gt;= &apos;a&apos; &amp;&amp; c &lt;= &apos;f&apos;)</span><br><span class="line">                        k |= (1 &lt;&lt; (c - &apos;a&apos;));</span><br><span class="line">                    </span><br><span class="line">                    // found locker</span><br><span class="line">                    else if(c&gt;= &apos;A&apos; &amp;&amp; c &lt;= &apos;F&apos; &amp;&amp; ((k&gt;&gt;(c - &apos;A&apos;)) &amp; 1) == 0)</span><br><span class="line">                        continue;</span><br><span class="line">                    if(!visited[newX][newY][k])&#123;</span><br><span class="line">                        visited[newX][newY][k] = true;</span><br><span class="line">                        q.push(&#123;newX * n + newY, k&#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            path++;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem 3"></a>Problem 3</h4><h4 id="403-Frog-Jump"><a href="#403-Frog-Jump" class="headerlink" title="403: Frog Jump"></a><a href="https://leetcode.com/problems/frog-jump/" target="_blank" rel="noopener">403: Frog Jump</a></h4><p>Similar method. Using bitmap to mark the visiting state of each stone.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    unordered_map&lt;long, bool&gt; dp;</span><br><span class="line">    bool helper(vector&lt;int&gt;&amp; stones, int cur, int k)&#123;</span><br><span class="line">        long comb = cur;</span><br><span class="line">        comb = (comb &lt;&lt; 32) | k;</span><br><span class="line">        if(dp.find(comb) != dp.end())</span><br><span class="line">            return dp[comb];</span><br><span class="line">        </span><br><span class="line">        for(int i = cur + 1; i &lt; stones.size(); i++)&#123;</span><br><span class="line">            int gapsize = stones[i] - stones[cur];</span><br><span class="line">            if(gapsize &lt; k - 1) continue;</span><br><span class="line">            if(gapsize &gt; k + 1)&#123;dp[comb] = false; return false;&#125;;</span><br><span class="line">            if(helper(stones, i, gapsize))</span><br><span class="line">                return dp[comb] = true;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        dp[comb] = (cur == stones.size() - 1);</span><br><span class="line">        return dp[comb];</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    bool canCross(vector&lt;int&gt;&amp; stones) &#123;</span><br><span class="line">        </span><br><span class="line">        return helper(stones, 0, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">algorithms</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">graph theory</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/05/graph-bfs-with-bitmask/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nodejs1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -523,11 +616,11 @@ pos = L+(m+L+x-L)\%C\\
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -912,11 +1005,11 @@ pos = L+(m+L+x-L)\%C\\
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1031,11 +1124,11 @@ pos = L+(m+L+x-L)\%C\\
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1058,96 +1151,6 @@ pos = L+(m+L+x-L)\%C\\
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/30/Leetcode之旅-从了解一棵树开始-0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-链表啊，链表！-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/27/链表啊，链表！-3/">Leetcode之旅|链表啊，链表！(3)</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/27/链表啊，链表！-3/" class="archive-article-date">
-  	<time datetime="2018-01-28T04:12:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>　　已经一周没更新博客了，这周真是命途多舛的一周。先是工作上的问题，后是人际关系的问题，以为已经够悲催了，觉得至少应该保持身体健康，心情愉悦，然后督促自己去健身，保持强健的体魄。坚持了三天后，被一个爱diss人的普拉提教练给push，然后很悲剧地把腰给伤了。当我回家，躺在床上，发现自己坐也坐不起来，站也站不起来的时候，眼泪止不住地流：我这是何苦呢？我又不胖[泪崩][泪崩][泪崩]。然后打开手机，发现自己都不知该找谁寻求安慰，毕竟我的朋友都胖也不健身，一个胖子看到身边的瘦子还这么上进估计也不想搭理我。</p>
-<p>　　从周三晚上到现在，躺着床上难受，也许是因为太孤独，哭了好多，也胡思乱想了好多，既顾影自怜，也认真地咽下了许多失望。写这篇博客，可能只是想像以前一样：即使知道徒劳无功，但只有让自己忙起来才不会那么难过。</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><a href="https://leetcode.com/problems/reorder-list/description/" target="_blank" rel="noopener">题目描述</a></h2><blockquote>
-<p>　　今天写的这道题和之前<a href="http://www.quanlion.com/2018/01/15/Leetcode%E4%B9%8B%E6%97%85%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BP25/" target="_blank" rel="noopener">反转k个节点</a>的这道有点类似,即：对一个已知链表：$L_0→L_1→…→L_{n-1}→L_n$,改变其链接顺序为：$L_0→L_n→L_1→L_{n-1}→L_2→L_{n-2}→…$。即第一个后为最后一个，接着是第二个，接着是倒数第二个…比如原链表为{1,2,3,4},修改后变为{1,4,2,3}。要求是原位修改，即不能改变原节点的值，只改变它们之间的先后顺序，也不需要返回任何值。
-　　</p>
-</blockquote>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>　　说实话，这道题我拿到手的时候基本没思路，因为链表这种数据结构的特殊性导致我们既无法通过下标直接访问某个节点，也无法知道某个节点的前驱节点。后来看一些帖子说这个问题是<a href="https://leetcode.com/problems/reverse-linked-list/description/" target="_blank" rel="noopener">反转节点</a>这道题的延伸，就有了想法。<br>　　我们不妨把链表看作一根均匀分布珠子的项链，然后让它对折，这样第一颗珠子会和最后一颗珠子对应，第二颗会和倒数第二颗对应，以此类推。这样一来，我们同步地遍历这两段绳子，不就可以按照要求缀出新的项链了吗？<br>　　所以问题就可以这么解决：我们将链表从中间分开，将后面那半反转，然后将两部分逐个拼接。这会用到我们常用的两个套路：找到中间位置和链表的反转。第一个套路就是熟悉的slow-fast指针法，即设置slow和fast两个指针，slow每次走一步，fast每次走两步，这样当fast到达终点时，slow会走一半到中间。根据需求可以对slow和fast进行初始化，比如slow=fast=head，或者slow=head,fast=head.next。第二个套路也很熟悉，即对每个节点保存其Pre和next，将其对调即可，而且因为是逐个反转，pre,cur,next会逐个后移，前驱与后继信息得以在循环中传递。<br>　　虽然这样，我们可能还会有一个问题：如果珠子是奇数个怎么办？这个好解决，因为奇数个珠子的项链肯定存在最中间的一颗，而这颗肯定会放在最后，我们只要将这颗珠子放在后半部分的第一个，这样后半部分反转后它即为这一半的最后一颗，在拼接时，由于后半部分晚于前半部分，所以这颗珠子肯定会是最后一个。<br>　　代码如下：</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reorderList</span><span class="params">(self, head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: void Do not return anything, modify head in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.next:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 套路一：通过slow和fast两个指针找到中心节点    </span></span><br><span class="line">        slow = head</span><br><span class="line">        fast = head.next</span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</span><br><span class="line">            slow = slow.next</span><br><span class="line">            fast = fast.next.next</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将链表以最中心的节点为分界线，划分为两个链表</span></span><br><span class="line">        <span class="comment"># 前面的一半为链表1，后面的链表为链表2</span></span><br><span class="line">        <span class="comment"># 套路二：将链表2反向</span></span><br><span class="line">        pre2 = slow</span><br><span class="line">        head2 = slow.next</span><br><span class="line">        slow.next = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span>(head2.next):</span><br><span class="line">            _next = head2.next</span><br><span class="line">            head2.next = pre2</span><br><span class="line">            pre2 = head2</span><br><span class="line">            head2 = _next</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将链表1和反向后的链表2逐个节点地拼接起来，</span></span><br><span class="line">        <span class="comment"># 还原出一个完整的链表</span></span><br><span class="line">        head2.next = pre2</span><br><span class="line">        head1 = head</span><br><span class="line">        <span class="keyword">while</span> head1 <span class="keyword">and</span> head2:</span><br><span class="line">            tmp1 = head1.next</span><br><span class="line">            tmp2 = head2.next</span><br><span class="line">            head1.next = head2</span><br><span class="line">            head2.next = tmp1</span><br><span class="line">            head2 = tmp2</span><br><span class="line">            head1 = tmp1</span><br><span class="line">        <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　虽然没有都更新到博客里，但链表这个主题的题目已经基本告一段落了，下一步是tree，已经被递归给虐惨。后面的链表的相关题目应该还是会找机会更新，免得自己忘记。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data Structure</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/27/链表啊，链表！-3/">展开全文 >></a>
         </p>
       
 
@@ -1287,15 +1290,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1311,23 +1314,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Linked list</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">程序设计</a>
+                <a href="javascript:void(0)" class="js-tag color1">algorithms</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color3">graph theory</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1351,6 +1346,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">娱乐八卦</a>
               </li>
              
@@ -1363,11 +1366,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+                <a href="javascript:void(0)" class="js-tag color5">程序设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
               </li>
              
               <li class="article-tag-list-item">

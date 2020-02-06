@@ -156,6 +156,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-链表啊，链表！-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/27/链表啊，链表！-3/">Leetcode之旅|链表啊，链表！(3)</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/27/链表啊，链表！-3/" class="archive-article-date">
+  	<time datetime="2018-01-28T04:12:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　已经一周没更新博客了，这周真是命途多舛的一周。先是工作上的问题，后是人际关系的问题，以为已经够悲催了，觉得至少应该保持身体健康，心情愉悦，然后督促自己去健身，保持强健的体魄。坚持了三天后，被一个爱diss人的普拉提教练给push，然后很悲剧地把腰给伤了。当我回家，躺在床上，发现自己坐也坐不起来，站也站不起来的时候，眼泪止不住地流：我这是何苦呢？我又不胖[泪崩][泪崩][泪崩]。然后打开手机，发现自己都不知该找谁寻求安慰，毕竟我的朋友都胖也不健身，一个胖子看到身边的瘦子还这么上进估计也不想搭理我。</p>
+<p>　　从周三晚上到现在，躺着床上难受，也许是因为太孤独，哭了好多，也胡思乱想了好多，既顾影自怜，也认真地咽下了许多失望。写这篇博客，可能只是想像以前一样：即使知道徒劳无功，但只有让自己忙起来才不会那么难过。</p>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><a href="https://leetcode.com/problems/reorder-list/description/" target="_blank" rel="noopener">题目描述</a></h2><blockquote>
+<p>　　今天写的这道题和之前<a href="http://www.quanlion.com/2018/01/15/Leetcode%E4%B9%8B%E6%97%85%EF%BC%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8BP25/" target="_blank" rel="noopener">反转k个节点</a>的这道有点类似,即：对一个已知链表：$L_0→L_1→…→L_{n-1}→L_n$,改变其链接顺序为：$L_0→L_n→L_1→L_{n-1}→L_2→L_{n-2}→…$。即第一个后为最后一个，接着是第二个，接着是倒数第二个…比如原链表为{1,2,3,4},修改后变为{1,4,2,3}。要求是原位修改，即不能改变原节点的值，只改变它们之间的先后顺序，也不需要返回任何值。
+　　</p>
+</blockquote>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>　　说实话，这道题我拿到手的时候基本没思路，因为链表这种数据结构的特殊性导致我们既无法通过下标直接访问某个节点，也无法知道某个节点的前驱节点。后来看一些帖子说这个问题是<a href="https://leetcode.com/problems/reverse-linked-list/description/" target="_blank" rel="noopener">反转节点</a>这道题的延伸，就有了想法。<br>　　我们不妨把链表看作一根均匀分布珠子的项链，然后让它对折，这样第一颗珠子会和最后一颗珠子对应，第二颗会和倒数第二颗对应，以此类推。这样一来，我们同步地遍历这两段绳子，不就可以按照要求缀出新的项链了吗？<br>　　所以问题就可以这么解决：我们将链表从中间分开，将后面那半反转，然后将两部分逐个拼接。这会用到我们常用的两个套路：找到中间位置和链表的反转。第一个套路就是熟悉的slow-fast指针法，即设置slow和fast两个指针，slow每次走一步，fast每次走两步，这样当fast到达终点时，slow会走一半到中间。根据需求可以对slow和fast进行初始化，比如slow=fast=head，或者slow=head,fast=head.next。第二个套路也很熟悉，即对每个节点保存其Pre和next，将其对调即可，而且因为是逐个反转，pre,cur,next会逐个后移，前驱与后继信息得以在循环中传递。<br>　　虽然这样，我们可能还会有一个问题：如果珠子是奇数个怎么办？这个好解决，因为奇数个珠子的项链肯定存在最中间的一颗，而这颗肯定会放在最后，我们只要将这颗珠子放在后半部分的第一个，这样后半部分反转后它即为这一半的最后一颗，在拼接时，由于后半部分晚于前半部分，所以这颗珠子肯定会是最后一个。<br>　　代码如下：</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reorderList</span><span class="params">(self, head)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: void Do not return anything, modify head in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.next:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 套路一：通过slow和fast两个指针找到中心节点    </span></span><br><span class="line">        slow = head</span><br><span class="line">        fast = head.next</span><br><span class="line">        <span class="keyword">while</span> fast <span class="keyword">and</span> fast.next:</span><br><span class="line">            slow = slow.next</span><br><span class="line">            fast = fast.next.next</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将链表以最中心的节点为分界线，划分为两个链表</span></span><br><span class="line">        <span class="comment"># 前面的一半为链表1，后面的链表为链表2</span></span><br><span class="line">        <span class="comment"># 套路二：将链表2反向</span></span><br><span class="line">        pre2 = slow</span><br><span class="line">        head2 = slow.next</span><br><span class="line">        slow.next = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span>(head2.next):</span><br><span class="line">            _next = head2.next</span><br><span class="line">            head2.next = pre2</span><br><span class="line">            pre2 = head2</span><br><span class="line">            head2 = _next</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将链表1和反向后的链表2逐个节点地拼接起来，</span></span><br><span class="line">        <span class="comment"># 还原出一个完整的链表</span></span><br><span class="line">        head2.next = pre2</span><br><span class="line">        head1 = head</span><br><span class="line">        <span class="keyword">while</span> head1 <span class="keyword">and</span> head2:</span><br><span class="line">            tmp1 = head1.next</span><br><span class="line">            tmp2 = head2.next</span><br><span class="line">            head1.next = head2</span><br><span class="line">            head2.next = tmp1</span><br><span class="line">            head2 = tmp2</span><br><span class="line">            head1 = tmp1</span><br><span class="line">        <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　虽然没有都更新到博客里，但链表这个主题的题目已经基本告一段落了，下一步是tree，已经被递归给虐惨。后面的链表的相关题目应该还是会找机会更新，免得自己忘记。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Data Structure</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/27/链表啊，链表！-3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Leetcode之旅-链表啊，链表！" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -202,11 +292,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -1007,15 +1097,15 @@ p(y) = p(x)|J| = \prod_{i=1}^{D}(2\pi\lambda_i)^{-1/2}exp(-\frac{y_1^2}{2\lambda
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Leetcode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -1176,15 +1266,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Leetcode</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1200,23 +1290,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Linked list</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">程序设计</a>
+                <a href="javascript:void(0)" class="js-tag color1">algorithms</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color3">graph theory</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1240,6 +1322,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读书笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">娱乐八卦</a>
               </li>
              
@@ -1252,11 +1342,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
+                <a href="javascript:void(0)" class="js-tag color5">程序设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Tree</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Graph</a>
               </li>
              
               <li class="article-tag-list-item">

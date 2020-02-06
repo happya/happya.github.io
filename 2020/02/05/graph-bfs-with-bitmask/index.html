@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>降维打击之LLE算法 | 福尔摩狮的博客</title>
+  <title>graph-bfs-with-bitmask | 福尔摩狮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="背景 　　最近在温习之前了解过的spectral clustering 的时候接触到一个看着bigger满满的术语：manifold learing，然后顺藤摸瓜找到一篇2000年的science，不过他们当时并没有大肆炒这个manifold learning的概念，而是提出了一种叫做“local linear embedding”的降维算法，在处理所谓的流形的降维的时候，效果比PCA要好很多。于">
-<meta name="keywords" content="随笔,机器学习,降维算法">
+  <meta name="description" content="Graph BFS with bitMaskIn ordinary BFS, we always use a vector (or array) to mark if a node is visited or not. However, in some problems, the re-visited is allowed, or sometimes we must revisit some n">
+<meta name="keywords" content="algorithms,graph theory">
 <meta property="og:type" content="article">
-<meta property="og:title" content="降维打击之LLE算法">
-<meta property="og:url" content="http://yoursite.com/2017/09/29/降维打击之LLE算法/index.html">
+<meta property="og:title" content="graph-bfs-with-bitmask">
+<meta property="og:url" content="http://yoursite.com/2020/02/05/graph-bfs-with-bitmask/index.html">
 <meta property="og:site_name" content="福尔摩狮的博客">
-<meta property="og:description" content="背景 　　最近在温习之前了解过的spectral clustering 的时候接触到一个看着bigger满满的术语：manifold learing，然后顺藤摸瓜找到一篇2000年的science，不过他们当时并没有大肆炒这个manifold learning的概念，而是提出了一种叫做“local linear embedding”的降维算法，在处理所谓的流形的降维的时候，效果比PCA要好很多。于">
+<meta property="og:description" content="Graph BFS with bitMaskIn ordinary BFS, we always use a vector (or array) to mark if a node is visited or not. However, in some problems, the re-visited is allowed, or sometimes we must revisit some n">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://instudio.mabangapp.com/img/037/WJ058/WJ058g08.jpg">
-<meta property="og:updated_time" content="2019-10-22T18:27:06.139Z">
+<meta property="og:updated_time" content="2020-02-06T06:50:18.717Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="降维打击之LLE算法">
-<meta name="twitter:description" content="背景 　　最近在温习之前了解过的spectral clustering 的时候接触到一个看着bigger满满的术语：manifold learing，然后顺藤摸瓜找到一篇2000年的science，不过他们当时并没有大肆炒这个manifold learning的概念，而是提出了一种叫做“local linear embedding”的降维算法，在处理所谓的流形的降维的时候，效果比PCA要好很多。于">
-<meta name="twitter:image" content="http://instudio.mabangapp.com/img/037/WJ058/WJ058g08.jpg">
+<meta name="twitter:title" content="graph-bfs-with-bitmask">
+<meta name="twitter:description" content="Graph BFS with bitMaskIn ordinary BFS, we always use a vector (or array) to mark if a node is visited or not. However, in some problems, the re-visited is allowed, or sometimes we must revisit some n">
   
     <link rel="alternative" href="/atom.xml" title="福尔摩狮的博客" type="application/atom+xml">
   
@@ -161,80 +159,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-降维打击之LLE算法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-graph-bfs-with-bitmask" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      降维打击之LLE算法
+      graph-bfs-with-bitmask
     </h1>
   
 
         
-        <a href="/2017/09/29/降维打击之LLE算法/" class="archive-article-date">
-  	<time datetime="2017-09-30T04:55:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-29</time>
+        <a href="/2020/02/05/graph-bfs-with-bitmask/" class="archive-article-date">
+  	<time datetime="2020-02-06T06:45:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><hr>
-<p>　　最近在温习之前了解过的spectral clustering 的时候接触到一个看着bigger满满的术语：manifold learing，然后顺藤摸瓜找到一篇2000年的science，不过他们当时并没有大肆炒这个manifold learning的概念，而是提出了一种叫做“local linear embedding”的降维算法，在处理所谓的流形的降维的时候，效果比PCA要好很多。于是我了解了下这个“简约而不简单”的LLE算法的具体实现方法，写一下我目前的理解。<br>　　<br>   <img src="http://instudio.mabangapp.com/img/037/WJ058/WJ058g08.jpg" alt="Swiss roll"><br>　　<br>　　<a href="http://instudio.mabangapp.com/img/037/WJ058/WJ058g08.jpg" target="_blank" rel="noopener">图片来源</a><br>　　首先，所谓流形，我脑海里最直观的印象就是上图这种Swiss roll,我吃的时候喜欢把它整个摊开成一张饼再吃，其实这个过程就实现了对瑞士卷的降维操作，即从三维降到了两维。降维前，我们看到相邻的卷层之间看着距离很近，但其实摊开成饼状后才发现其实距离很远，所以如果不进行降维操作，如果根据近邻原则去判断相似性其实是不准确的。</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><hr>
-<p>　　LLE的原理其实是这样的：</p>
-<ul>
-<li><p>所谓局部线性，就是认为在整个数据集的某小范围内，数据是线性的，就比如虽然地球是圆的，但我们还是可以认为我们的篮球场是个平面；而这个“小范围”，最直接的办法就是k-近邻原则。这个“近邻”的判断也可以是不同的依据：比如欧氏距离，测地距离等。</p>
-</li>
-<li><p>既然是线性，那么对每个数据点$x_i$(D维数据，即$D\times 1$的列向量)，可以用其k近邻的数据点的线性组合来表示，即$x_i = \sum_{j=1}^{k}w_{ji}x_{ji}$。其中，$w_i$是$k\times 1$的列向量，$w_{ji}$是$w_i$的第$j$行,$x_{ji}$是$x_i$的第j个近邻点。</p>
-</li>
-</ul>
-<ul>
-<li><p>通过使loss function最小化： </p>
-<script type="math/tex; mode=display">\arg\min \limits_{W}\sum_{i=1}^{N}(\|x_i-\sum_{j=1}^{k}w_{ji}x_{ji}\|_2^2)</script><p>得到权重系数$w = [w_1, w_2, …, w_N]$,一共N个数据点，对应$N$列$w_i$。</p>
-</li>
-<li><p>接下来是LLE中又一个假设：即认为将原始数据从D维降到d维后，$x_i(D\times 1) \rightarrow y_i(d\times 1)$,其依旧可以表示为其k近邻的线性组合，且组合系数不变，即$w_i$,再一次通过最小化loss function:</p>
-</li>
-</ul>
-<script type="math/tex; mode=display">\arg\min \limits_{Y}\sum_{i=1}^{N}(\|y_i-\sum_{j=1}^{k}w_{ji}y_{ji}\|_2^2)</script><p>得到降维后的数据。</p>
-<h2 id="算法推导"><a href="#算法推导" class="headerlink" title="算法推导"></a>算法推导</h2><hr>
-<h3 id="step-1："><a href="#step-1：" class="headerlink" title="step 1："></a>step 1：</h3><hr>
-<p>运用k近邻算法得到每个数据的k近邻点：</p>
-<script type="math/tex; mode=display">N_i = KNN(x_i,k), N_i = [x_{1i}, ..., x_{ki}]</script><h3 id="step-2-求解权重系数矩阵"><a href="#step-2-求解权重系数矩阵" class="headerlink" title="step 2: 求解权重系数矩阵"></a>step 2: 求解权重系数矩阵</h3><hr>
-<p>即求解：</p>
-<script type="math/tex; mode=display">\arg\min \limits_{W}\sum_{i=1}^{N} \|x_i - \sum_{j=1}^{k}w_{ji}x_{ji}\|^2, s.t. \sum_{j=1}^k</script><p>在推导之前，我们首先统一下数据的矩阵表达形式</p>
-<p>　　输入：$X = [x_1, x_2, …, x_N], D\times N$</p>
-<p>　　权重：$w = [w_1, w_2, …, w_N], k\times N$</p>
-<p>　　</p>
-<script type="math/tex; mode=display">\Phi(w)=\sum_{i=1}^{N} \|x_i - \sum_{j=1}^{k}w_{ji}x_{ji}\|^2</script><script type="math/tex; mode=display">=\sum_{i=1}^{N} \|\sum_{j=1}^k (x_i-x_{ji})w_{ji}\|^2</script><script type="math/tex; mode=display">=\sum_{i=1}^N \|(X_i-N_i)w_i\|^2, X_i =\underbrace {[x_i, ..., x_i]}_k, N_i = [x_{1i}, ..., x_{ki}]</script><script type="math/tex; mode=display">= \sum_{i=1}^N w_i^T(X_i-N_i)^T(X_i-N_i)w_i</script><p>$let\ S_i = (X_i-N_i)^T(X_i-N_i)$ being the covariance matrix, then:</p>
-<script type="math/tex; mode=display">\Phi(w)=\sum_{i=1}^N w_i^T S_i w_i</script><p>拉格朗日乘子法：</p>
-<script type="math/tex; mode=display">L(w_i) = w_i^T S_i w_i + \lambda(w_i^T-1)</script><p>求导：</p>
-<script type="math/tex; mode=display">\frac{\partial L(w_i)}{\partial w_i} = 2S_iw_i+\lambda I = 0</script><script type="math/tex; mode=display">w_i = \frac{S_i^{-1}I}{I^T S_i^{-1}I}</script><p>　　<br>　　就上述表达式而言，局部协方差矩阵$S_i$是个$k\times k$的矩阵，其分母其实是$S_i$的逆矩阵的所有元素之和，而其分子是$S_i$的逆矩阵对行求和后得到的列向量。</p>
- <a id="more"></a>
-<h3 id="step-3-映射到低维空间-d-lt-D"><a href="#step-3-映射到低维空间-d-lt-D" class="headerlink" title="step 3: 映射到低维空间($d&lt;D$)"></a>step 3: 映射到低维空间($d&lt;D$)</h3><hr>
-<p>即求解：</p>
-<script type="math/tex; mode=display">\arg \min \limits_{Y} \Psi(Y) = \sum_{i=1}^N\|y_i - \sum_{j=1}^k w_{ji}y_{ji}\|^2, s.t. \sum_{i=1}^N y_i = 0, \sum_{i=1}^N y_i y_i^T = NI_{d\times d}</script><p>　　</p>
-<p>　　低维空间向量：$Y = [y_1, y_2, …, y_N], d\times N$</p>
-<p>首先，用一个$N\times N$的稀疏矩阵(sparse matrix)$W$来表示$w$:</p>
-<p>　　　　　对$i$的近邻点j：   $W_{ji} = w_{ji}$;</p>
-<p>　　　　　否则:   $W_{ji} = 0$</p>
-<p>因此：</p>
-<script type="math/tex; mode=display">\sum_{j=1}^k w_{ji}y_{ji} = YW_i</script><p>$W_i$是$W$方阵的第$i$列。所以</p>
-<script type="math/tex; mode=display">\Psi(Y) = \sum_{i=1}^N\|Y(I_i-W_i)\|^2</script><p>由矩阵论可知：对矩阵$A = [a_1, a_2, …, a_N]$</p>
-<script type="math/tex; mode=display">\sum_i (a_i)^2 = \sum_i a_i^T a_i = tr(AA^T)</script><p>所以：</p>
-<script type="math/tex; mode=display">\Psi(Y) = tr(Y(I_i-W_i)(I_i-W_i)^TY^T)</script><script type="math/tex; mode=display">= tr(YMY^T),    M = (I_i-W_i)(I_i-W_i)^T</script><p>再一次拉格朗日乘子法：</p>
-<script type="math/tex; mode=display">L(Y) = YMY^T+\lambda (YY^T-NI)</script><p>求导：</p>
-<script type="math/tex; mode=display">\frac{\partial L}{\partial Y} = 2MY^T+2\lambda Y^T = 0</script><p>即</p>
-<script type="math/tex; mode=display">MY^T = \lambda'Y^T</script><p>　　可见Y其实是M的特征向量构成的矩阵，为了将数据降到d维，我们只需要取M的最小的d个非零特征值对应的特征向量，而一般第一个最小的特征值接近0，我们将其舍弃，取前$[2， d+1]$个特征值对应的特征向量。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><hr>
-<ol>
-<li>在step 3中为什么是取d个最小的非零特征值，而不是最大的d个特征值呢？</li>
-<li>怎样理解每一步的约束条件呢？</li>
+        <hr>
+<h1 id="Graph-BFS-with-bitMask"><a href="#Graph-BFS-with-bitMask" class="headerlink" title="Graph BFS with bitMask"></a>Graph BFS with bitMask</h1><p>In ordinary BFS, we always use a <code>vector</code> (or array) to mark if a node is visited or not. However, in some problems, the re-visited is allowed, or sometimes we must revisit some nodes to get the solution. In this case, we can use a bitmap, combined with the node number, to create the new node id for the original node. So these new IDs not only contains the node number but also contains information like the path that gets to this node.</p>
+<h3 id="How-to-construct-the-new-node-ID"><a href="#How-to-construct-the-new-node-ID" class="headerlink" title="How to construct the new node ID?"></a>How to construct the new node ID?</h3><ol>
+<li>The most intuitive way is to construct a new class as below.</li>
 </ol>
-<p>输公式好累呀~~~~</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Node &#123;</span><br><span class="line">    int v;</span><br><span class="line">    int bitMask;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Then if we have a set called <code>visited</code>, instead of add the original node to <code>visited</code>, we insert the new <code>Node</code> to it. And to check if one node is visited, we have to check if the corresponding <code>Node</code> is visited, which means both the node and the <code>bitMask</code> have to be checked.</p>
+<ol>
+<li>The second way is to utilize the <code>32bit</code> feature of integer. If the node number is less than 16 (and represented by integer in [0, 15]), we can construct the node id as below.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newNode = (node &lt;&lt; 16) | (1 &lt;&lt; node);</span><br></pre></td></tr></table></figure>
+<h3 id="Real-Problems"><a href="#Real-Problems" class="headerlink" title="Real Problems"></a>Real Problems</h3><h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1"></a>Problem 1</h3><h4 id="847-Shortest-Path-Visiting-All-Nodes"><a href="#847-Shortest-Path-Visiting-All-Nodes" class="headerlink" title="847. Shortest Path Visiting All Nodes"></a><a href="https://leetcode.com/problems/shortest-path-visiting-all-nodes/" target="_blank" rel="noopener">847. Shortest Path Visiting All Nodes</a></h4><p>Solution: BFS + bitMask. Some nodes have to be re-visited because sometimes it is impossible to traverse all the nodes without heading back.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">   </span><br><span class="line">public:</span><br><span class="line">    int shortestPathLength(vector&lt;vector&lt;int&gt;&gt;&amp; graph) &#123;</span><br><span class="line">        int N = graph.size();</span><br><span class="line">        queue&lt;pair&lt;int,int&gt;&gt; q; // the queue for BFS</span><br><span class="line">        unordered_set&lt;int&gt; visited; // visited record</span><br><span class="line">        for(int i = 0; i &lt; N; i++)&#123;</span><br><span class="line">            int bitMask = (1 &lt;&lt; i);</span><br><span class="line">            q.emplace(i, bitMask); // both node and bitMask</span><br><span class="line">            visited.insert((i &lt;&lt; 16) | bitMask); // new node ID</span><br><span class="line">        &#125;</span><br><span class="line">        int fullMask = (1 &lt;&lt; N) - 1;</span><br><span class="line">        int level = 0;</span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            int sz = q.size();</span><br><span class="line">            for(int i = 0; i &lt; sz; i++)&#123;</span><br><span class="line">                int v = q.front().first;</span><br><span class="line">                int bitMask = q.front().second;</span><br><span class="line">                q.pop();</span><br><span class="line">                </span><br><span class="line">                if(bitMask == fullMask)</span><br><span class="line">                    return level;</span><br><span class="line">                for(auto&amp; w : graph[v])&#123;</span><br><span class="line">                    // The mask for w is get the mask for v</span><br><span class="line">                    // and add the visited bit for w</span><br><span class="line">                    // that is bitMask | (1 &lt;&lt; w)</span><br><span class="line">                    int nextMask = bitMask | (1 &lt;&lt; w); </span><br><span class="line">                    // construct the nodeID with node number</span><br><span class="line">                    // and mask</span><br><span class="line">                    int nodeId = ((w &lt;&lt; 16) | nextMask);</span><br><span class="line">                    // If this nodeId is visited,</span><br><span class="line">                    // it will not be consider again</span><br><span class="line">                    if(visited.find(nodeId) != visited.end())</span><br><span class="line">                        continue;</span><br><span class="line">                    q.emplace(w, nextMask);</span><br><span class="line">                    visited.insert(nodeId);</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            level++;</span><br><span class="line">        &#125;</span><br><span class="line">        return level;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem 2"></a>Problem 2</h4><h4 id="864-Shortest-Path-to-get-all-keys"><a href="#864-Shortest-Path-to-get-all-keys" class="headerlink" title="864: Shortest Path to get all keys"></a><a href="https://leetcode.com/problems/shortest-path-to-get-all-keys/" target="_blank" rel="noopener">864: Shortest Path to get all keys</a></h4><p>Some nodes need to be revisited because sometimes we should first get keys and then get back to open the corresponding lockers.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    bool isValid(int x, int y, vector&lt;string&gt;&amp; grid)&#123;</span><br><span class="line">        if(x &lt; 0 || y &lt; 0 || x &gt;= grid.size() || y &gt;= grid[0].size() || grid[x][y] == &apos;#&apos;)</span><br><span class="line">            return false;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    int shortestPathAllKeys(vector&lt;string&gt;&amp; grid) &#123;</span><br><span class="line">        int m = grid.size();</span><br><span class="line">        int n = grid[0].size();</span><br><span class="line">        </span><br><span class="line">        queue&lt;pair&lt;int,int&gt;&gt; q;</span><br><span class="line">        int K = 0;</span><br><span class="line">        // visited to mark the state of owned keys</span><br><span class="line">        // at most keys, using bitmap, 111111 = 2^6 - 1, then total state is 64</span><br><span class="line">        vector&lt;vector&lt;vector&lt;bool&gt;&gt;&gt; visited(m, vector&lt;vector&lt;bool&gt;&gt;(n, vector&lt;bool&gt;(64, 0)));</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">            for(int j = 0; j &lt; n; j++) &#123;</span><br><span class="line">                if(grid[i][j] == &apos;@&apos;)&#123;</span><br><span class="line">                    q.push(&#123;i*n+j, 0&#125;);</span><br><span class="line">                    visited[i][j][0] = true;</span><br><span class="line">                &#125;</span><br><span class="line">                if(grid[i][j] &gt;= &apos;A&apos; &amp;&amp; grid[i][j] &lt;= &apos;F&apos;)</span><br><span class="line">                    K |= (1 &lt;&lt; (grid[i][j] - &apos;A&apos;));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int d[4][2] = &#123;&#123;1, 0&#125;, &#123;-1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;</span><br><span class="line">        int path = 0;</span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            int sz = q.size();</span><br><span class="line">            for(int i = 0; i &lt; sz; i++)&#123;</span><br><span class="line">                int x = q.front().first / n;</span><br><span class="line">                int y = q.front().first % n;</span><br><span class="line">                int ownKeys = q.front().second;</span><br><span class="line">                q.pop();</span><br><span class="line"></span><br><span class="line">                // holding all keys</span><br><span class="line">                if (ownKeys == K)</span><br><span class="line">                    return path;</span><br><span class="line"></span><br><span class="line">                for(int j = 0; j &lt; 4; j++)&#123;</span><br><span class="line">                    int newX = x + d[j][0];</span><br><span class="line">                    int newY = y + d[j][1];</span><br><span class="line">                    int k = ownKeys;</span><br><span class="line">                    if(!isValid(newX, newY, grid))</span><br><span class="line">                        continue;</span><br><span class="line">                    </span><br><span class="line">                    char c = grid[newX][newY];</span><br><span class="line">                    // found key: update k</span><br><span class="line">                    if(c &gt;= &apos;a&apos; &amp;&amp; c &lt;= &apos;f&apos;)</span><br><span class="line">                        k |= (1 &lt;&lt; (c - &apos;a&apos;));</span><br><span class="line">                    </span><br><span class="line">                    // found locker</span><br><span class="line">                    else if(c&gt;= &apos;A&apos; &amp;&amp; c &lt;= &apos;F&apos; &amp;&amp; ((k&gt;&gt;(c - &apos;A&apos;)) &amp; 1) == 0)</span><br><span class="line">                        continue;</span><br><span class="line">                    if(!visited[newX][newY][k])&#123;</span><br><span class="line">                        visited[newX][newY][k] = true;</span><br><span class="line">                        q.push(&#123;newX * n + newY, k&#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            path++;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem 3"></a>Problem 3</h4><h4 id="403-Frog-Jump"><a href="#403-Frog-Jump" class="headerlink" title="403: Frog Jump"></a><a href="https://leetcode.com/problems/frog-jump/" target="_blank" rel="noopener">403: Frog Jump</a></h4><p>Similar method. Using bitmap to mark the visiting state of each stone.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    </span><br><span class="line">private:</span><br><span class="line">    unordered_map&lt;long, bool&gt; dp;</span><br><span class="line">    bool helper(vector&lt;int&gt;&amp; stones, int cur, int k)&#123;</span><br><span class="line">        long comb = cur;</span><br><span class="line">        comb = (comb &lt;&lt; 32) | k;</span><br><span class="line">        if(dp.find(comb) != dp.end())</span><br><span class="line">            return dp[comb];</span><br><span class="line">        </span><br><span class="line">        for(int i = cur + 1; i &lt; stones.size(); i++)&#123;</span><br><span class="line">            int gapsize = stones[i] - stones[cur];</span><br><span class="line">            if(gapsize &lt; k - 1) continue;</span><br><span class="line">            if(gapsize &gt; k + 1)&#123;dp[comb] = false; return false;&#125;;</span><br><span class="line">            if(helper(stones, i, gapsize))</span><br><span class="line">                return dp[comb] = true;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        dp[comb] = (cur == stones.size() - 1);</span><br><span class="line">        return dp[comb];</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    bool canCross(vector&lt;int&gt;&amp; stones) &#123;</span><br><span class="line">        </span><br><span class="line">        return helper(stones, 0, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -278,15 +239,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">algorithms</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">降维算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">graph theory</a>
         		</li>
       		
 		</ul>
@@ -342,7 +299,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/09/29/降维打击之LLE算法/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/05/graph-bfs-with-bitmask/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -356,18 +313,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/21/PRML-之无处不在的高斯分布/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          PRML 之无处不在的高斯分布
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/23/关于最近薛之谦事件的一点看法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">关于最近薛之谦事件的一点看法</div>
+    <a href="/2019/11/04/nodejs1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nodejs+Express+mongodb搭建个人博客体验（1）</div>
       <i class="icon-circle-right"></i>
     </a>
   
