@@ -97,69 +97,72 @@ Some nodes need to be revisited because sometimes we should first get keys and t
 ```text
 class Solution {
 private:
-    bool isValid(int x, int y, vector<string>& grid){
+    bool isValid(vector<string>& grid, int x, int y){
         if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size() || grid[x][y] == '#')
             return false;
         return true;
     }
 public:
     int shortestPathAllKeys(vector<string>& grid) {
-        int m = grid.size();
-        int n = grid[0].size();
-        
         queue<pair<int,int>> q;
-        int K = 0;
-        // visited to mark the state of owned keys
-        // at most keys, using bitmap, 111111 = 2^6 - 1, then total state is 64
-        vector<vector<vector<bool>>> visited(m, vector<vector<bool>>(n, vector<bool>(64, 0)));
-
+        unordered_set<int> visited;
+         
+        int m = grid.size() , n = grid[0].size();
+        int totalKey = 0;
         for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++) {
-                if(grid[i][j] == '@'){
-                    q.push({i*n+j, 0});
-                    visited[i][j][0] = true;
+            for(int j = 0; j < n; j++){
+                char c = grid[i][j];
+                if(c == '@'){
+                    int pos = i * n + j;
+                    q.emplace(pos, 0);
+                    visited.insert(pos<<16);
                 }
-                if(grid[i][j] >= 'A' && grid[i][j] <= 'F')
-                    K |= (1 << (grid[i][j] - 'A'));
+                if(c >= 'A' && c <= 'F')
+                    totalKey |= (1 << (c - 'A'));
             }
         }
-        int d[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        int path = 0;
+        // get 4 direction vectors
+        int d[4][2] = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+        int level = 0;
         while(!q.empty()){
             int sz = q.size();
             for(int i = 0; i < sz; i++){
-                int x = q.front().first / n;
-                int y = q.front().first % n;
-                int ownKeys = q.front().second;
+                int pos = q.front().first;
+                int bitMask = q.front().second;
                 q.pop();
-
-                // holding all keys
-                if (ownKeys == K)
-                    return path;
-
+                
+                // if hold all keys
+                if(bitMask == totalKey)
+                    return level;
+                
+                int x = pos / n, y = pos % n;
                 for(int j = 0; j < 4; j++){
                     int newX = x + d[j][0];
                     int newY = y + d[j][1];
-                    int k = ownKeys;
-                    if(!isValid(newX, newY, grid))
+                    if(!isValid(grid, newX, newY)) continue;
+                    
+                    char c= grid[newX][newY];
+                    int ownKeys = bitMask;
+                    // if it is a key
+                    if( c >= 'a' && c <= 'f')
+                        ownKeys |= (1 << (c - 'a'));
+                    if(ownKeys == totalKey)
+                        return level + 1;
+                    // if it is  a locker without corresponding key
+                    else if(c >= 'A' && c <= 'F' && ((ownKeys >> (c - 'A')) & 1) == 0 )
                         continue;
                     
-                    char c = grid[newX][newY];
-                    // found key: update k
-                    if(c >= 'a' && c <= 'f')
-                        k |= (1 << (c - 'a'));
-                    
-                    // found locker
-                    else if(c>= 'A' && c <= 'F' && ((k>>(c - 'A')) & 1) == 0)
-                        continue;
-                    if(!visited[newX][newY][k]){
-                        visited[newX][newY][k] = true;
-                        q.push({newX * n + newY, k});
+                    // other condictions: road or locker but has key
+                    int newPos = newX * n + newY;
+                    int nodeId = ((newPos << 16) | ownKeys);
+                    if(visited.find(nodeId) == visited.end()){
+                        visited.insert(nodeId);
+                        q.emplace(newPos, ownKeys);
                     }
+                    
                 }
             }
-            
-            path++;
+            level++;
         }
         return -1;
     }
