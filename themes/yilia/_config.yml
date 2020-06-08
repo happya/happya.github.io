@@ -121,9 +121,9 @@ slider:
 #smart_menu:
 #  friends: false
 smart_menu:
-  innerArchive: '所有文章'
+  innerArchive: 'All blogs'
  # friends: '友链'
-  aboutme: '关于我'
+  aboutme: 'About me'
 
 #friends:
  # 知乎专栏:
